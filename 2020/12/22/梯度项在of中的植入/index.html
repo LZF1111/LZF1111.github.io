@@ -4,7 +4,7 @@
 
 <head>
   
-  <title>LZF</title>
+  <title>梯度项在of中的植入 - LZF</title>
   <meta charset="UTF-8">
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
@@ -12,16 +12,20 @@
   
 
   <link rel="shortcut icon" href="/favicon.ico" type="image/png" />
-  <meta property="og:type" content="website">
-<meta property="og:title" content="LZF">
-<meta property="og:url" content="http://example.com/index.html">
+  <meta name="description" content="#of中压力梯度在周期性边界条件中的实现参考文献：[1] : https:&#x2F;&#x2F;www.cfd-china.com&#x2F;topic&#x2F;1992&#x2F;cyclic%E5%91%A8%E6%9C%9F%E6%80%A7%E8%BE%B9%E7%95%8C%E6%9D%A1%E4%BB%B6&#x2F;6[2] : https:&#x2F;&#x2F;openfoam.org&#x2F;release&#x2F;2-2-0&#x2F;boundary-conditions&#x2F;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="梯度项在of中的植入">
+<meta property="og:url" content="http://example.com/2020/12/22/%E6%A2%AF%E5%BA%A6%E9%A1%B9%E5%9C%A8of%E4%B8%AD%E7%9A%84%E6%A4%8D%E5%85%A5/index.html">
 <meta property="og:site_name" content="LZF">
+<meta property="og:description" content="#of中压力梯度在周期性边界条件中的实现参考文献：[1] : https:&#x2F;&#x2F;www.cfd-china.com&#x2F;topic&#x2F;1992&#x2F;cyclic%E5%91%A8%E6%9C%9F%E6%80%A7%E8%BE%B9%E7%95%8C%E6%9D%A1%E4%BB%B6&#x2F;6[2] : https:&#x2F;&#x2F;openfoam.org&#x2F;release&#x2F;2-2-0&#x2F;boundary-conditions&#x2F;">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-12-22T07:00:59.000Z">
+<meta property="article:modified_time" content="2020-12-22T09:40:12.000Z">
 <meta property="article:author" content="LZF">
 <meta name="twitter:card" content="summary">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/combine/npm/highlight.js@9.15.8/styles/atom-one-dark.css,gh/nexmoe/nexmoe.github.io@latest/lib/mdui_043tiny/css/mdui.css,gh/nexmoe/nexmoe.github.io@latest/lib/iconfont/iconfont.css,gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css?v=233" crossorigin>
   
-  <link rel="stylesheet" href="/css/style.css?v=1608639671657">
+  <link rel="stylesheet" href="/css/style.css?v=1608639671643">
 <meta name="generator" content="Hexo 5.3.0"></head>
 
 <body class="mdui-drawer-body-left">
@@ -129,27 +133,26 @@
   </div>
   <div id="nexmoe-content">
     <div class="nexmoe-primary">
-        <section class="nexmoe-posts">
+        <div class="nexmoe-post">
+  
+      <div class="nexmoe-post-cover" style="padding-bottom: 62.5%;"> 
+          <img data-src="https://w.wallhaven.cc/full/ne/wallhaven-neo5po.jpg" data-sizes="auto" alt="梯度项在of中的植入" class="lazyload">
+          <h1>梯度项在of中的植入</h1>
+      </div>
+  
+  
+  <div class="nexmoe-post-meta nexmoe-rainbow" style="margin:10px 0!important;">
+    <a><i class="nexmoefont icon-calendar-fill"></i>2020年12月22日</a>
+    <a><i class="nexmoefont icon-areachart"></i>1.6k 字</a>
+    <a><i class="nexmoefont icon-time-circle-fill"></i>大概 8 分钟</a>
+</div>
+
+  <div class="nexmoe-post-right">
     
-    <div class="nexmoe-post">
-        <a href="/2020/12/22/%E6%A2%AF%E5%BA%A6%E9%A1%B9%E5%9C%A8of%E4%B8%AD%E7%9A%84%E6%A4%8D%E5%85%A5/">
-            
-                <div class="nexmoe-post-cover mdui-ripple" style="padding-bottom: 62.5%;"> 
-                    <img data-src="https://w.wallhaven.cc/full/ne/wallhaven-neo5po.jpg" data-sizes="auto" alt="梯度项在of中的植入" class="lazyload">
-                    <h1>梯度项在of中的植入</h1>
-                </div>
-            
-        </a>
+  </div>
 
-        <div class="nexmoe-post-meta nexmoe-rainbow">
-            <a><i class="nexmoefont icon-calendar-fill"></i>2020年12月22日</a>
-            <a><i class="nexmoefont icon-areachart"></i>1.6k 字</a>
-            <a><i class="nexmoefont icon-time-circle-fill"></i>大概 8 分钟</a>
-        </div>
-
-        <article>
-            
-                <p>#of中压力梯度在周期性边界条件中的实现<br>参考文献：<br>[1] : <a target="_blank" rel="noopener" href="https://www.cfd-china.com/topic/1992/cyclic%E5%91%A8%E6%9C%9F%E6%80%A7%E8%BE%B9%E7%95%8C%E6%9D%A1%E4%BB%B6/6">https://www.cfd-china.com/topic/1992/cyclic%E5%91%A8%E6%9C%9F%E6%80%A7%E8%BE%B9%E7%95%8C%E6%9D%A1%E4%BB%B6/6</a><br>[2] : <a target="_blank" rel="noopener" href="https://openfoam.org/release/2-2-0/boundary-conditions/">https://openfoam.org/release/2-2-0/boundary-conditions/</a><br>[3] : <a target="_blank" rel="noopener" href="https://www.cfd-china.com/topic/2121/q-dns%E8%AE%A1%E7%AE%97%E6%A7%BD%E9%81%93%E6%B5%81%E9%81%87%E5%88%B0%E4%BA%86%E4%B8%80%E4%BA%9B%E9%97%AE%E9%A2%98-%E6%B1%82%E5%A4%A7%E7%A5%9E%E4%BB%AC%E6%8C%87%E7%82%B9">https://www.cfd-china.com/topic/2121/q-dns%E8%AE%A1%E7%AE%97%E6%A7%BD%E9%81%93%E6%B5%81%E9%81%87%E5%88%B0%E4%BA%86%E4%B8%80%E4%BA%9B%E9%97%AE%E9%A2%98-%E6%B1%82%E5%A4%A7%E7%A5%9E%E4%BB%AC%E6%8C%87%E7%82%B9</a><br>[4] : <a target="_blank" rel="noopener" href="https://blog.csdn.net/CloudBird07/article/details/105102079">https://blog.csdn.net/CloudBird07/article/details/105102079</a></p>
+  <article>
+    <p>#of中压力梯度在周期性边界条件中的实现<br>参考文献：<br>[1] : <a target="_blank" rel="noopener" href="https://www.cfd-china.com/topic/1992/cyclic%E5%91%A8%E6%9C%9F%E6%80%A7%E8%BE%B9%E7%95%8C%E6%9D%A1%E4%BB%B6/6">https://www.cfd-china.com/topic/1992/cyclic%E5%91%A8%E6%9C%9F%E6%80%A7%E8%BE%B9%E7%95%8C%E6%9D%A1%E4%BB%B6/6</a><br>[2] : <a target="_blank" rel="noopener" href="https://openfoam.org/release/2-2-0/boundary-conditions/">https://openfoam.org/release/2-2-0/boundary-conditions/</a><br>[3] : <a target="_blank" rel="noopener" href="https://www.cfd-china.com/topic/2121/q-dns%E8%AE%A1%E7%AE%97%E6%A7%BD%E9%81%93%E6%B5%81%E9%81%87%E5%88%B0%E4%BA%86%E4%B8%80%E4%BA%9B%E9%97%AE%E9%A2%98-%E6%B1%82%E5%A4%A7%E7%A5%9E%E4%BB%AC%E6%8C%87%E7%82%B9">https://www.cfd-china.com/topic/2121/q-dns%E8%AE%A1%E7%AE%97%E6%A7%BD%E9%81%93%E6%B5%81%E9%81%87%E5%88%B0%E4%BA%86%E4%B8%80%E4%BA%9B%E9%97%AE%E9%A2%98-%E6%B1%82%E5%A4%A7%E7%A5%9E%E4%BB%AC%E6%8C%87%E7%82%B9</a><br>[4] : <a target="_blank" rel="noopener" href="https://blog.csdn.net/CloudBird07/article/details/105102079">https://blog.csdn.net/CloudBird07/article/details/105102079</a></p>
 <iframe src="//player.bilibili.com/player.html?aid=330155473&bvid=BV1LA411j7Nb&cid=252146163&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
 
 <p>1.设置周期型边界条件需要使用cyclic边界条件并指定cyclic边界条件的类型，利用snappyHexMesh生成网格以及边界后进入ployMesh文件夹中编辑boundary文件，将想要设置为周期性边界条件的边界设置为cyclic并设置好他们的相邻边界，这里值得一提的是需要放大matchToTolerance的值方便之后createPatch的设定</p>
@@ -373,61 +376,45 @@ patches
 <p>$\rho \frac{\partial \vec{u}}{\partial t}+\rho \nabla(\vec{u} u)=\nabla(\mu \nabla \vec{u})-\nabla p-(\vec{g} \cdot \vec{s}) \nabla \rho$</p>
 <p>故确实是of中重力相起体积力源项的作用，但是返回的是$(\vec{g} \cdot \vec{s}) \nabla \rho$和增加压力梯度是同样的效果单位也是（1，-2，-2，0，0，0，0），但是是无法通过直接给g的数值来达到添加压力梯度的条件的。</p>
 
-            
-        </article>
-    </div>
+  </article>
+
+  
     
-    <div class="nexmoe-post">
-        <a href="/2020/12/22/%E6%B5%8B%E8%AF%95/">
-            
-                <div class="nexmoe-post-cover mdui-ripple" style="padding-bottom: 62.5%;"> 
-                    <img data-src="https://w.wallhaven.cc/full/2e/wallhaven-2ezz8m.jpg" data-sizes="auto" alt="测试" class="lazyload">
-                    <h1>测试</h1>
-                </div>
-            
-        </a>
-
-        <div class="nexmoe-post-meta nexmoe-rainbow">
-            <a><i class="nexmoefont icon-calendar-fill"></i>2020年12月22日</a>
-            <a><i class="nexmoefont icon-areachart"></i>60 字</a>
-            <a><i class="nexmoefont icon-time-circle-fill"></i>大概 1 分钟</a>
-        </div>
-
-        <article>
-            
-                <p>测试标题封面，测试插入射流图片，测试输入公式<br><img src="/im/sheliu.jpg"></p>
-<p>$\frac{\partial \rho \mathbf{U}}{\partial t}+\nabla \cdot(\rho \mathbf{U} \mathbf{U})-\nabla \cdot \tau=-\nabla p+\rho \mathbf{g}+\mathbf{F}$<br> $\frac{\partial \rho}{\partial t}+\nabla \cdot(\rho \mathbf{U})=0$<br> $\nabla \cdot \mathbf{U}=0$</p>
-
-            
-        </article>
-    </div>
+  <div class="nexmoe-post-copyright">
+    <strong>Author：</strong>LZF<br>
+    <strong>Link：</strong><a href="http://example.com/2020/12/22/%E6%A2%AF%E5%BA%A6%E9%A1%B9%E5%9C%A8of%E4%B8%AD%E7%9A%84%E6%A4%8D%E5%85%A5/" title="http:&#x2F;&#x2F;example.com&#x2F;2020&#x2F;12&#x2F;22&#x2F;%E6%A2%AF%E5%BA%A6%E9%A1%B9%E5%9C%A8of%E4%B8%AD%E7%9A%84%E6%A4%8D%E5%85%A5&#x2F;" target="_blank" rel="noopener">http:&#x2F;&#x2F;example.com&#x2F;2020&#x2F;12&#x2F;22&#x2F;%E6%A2%AF%E5%BA%A6%E9%A1%B9%E5%9C%A8of%E4%B8%AD%E7%9A%84%E6%A4%8D%E5%85%A5&#x2F;</a><br>
     
-    <div class="nexmoe-post">
-        <a href="/2020/12/22/HelloWorld/">
-            
-                <div class="nexmoe-post-cover mdui-ripple" style="padding-bottom: 66.66666666666666%;"> 
-                    <img data-src="https://w.wallhaven.cc/full/x1/wallhaven-x1272z.jpg" data-sizes="auto" alt="HelloWorld" class="lazyload">
-                    <h1>HelloWorld</h1>
-                </div>
-            
-        </a>
-
-        <div class="nexmoe-post-meta nexmoe-rainbow">
-            <a><i class="nexmoefont icon-calendar-fill"></i>2020年12月22日</a>
-            <a><i class="nexmoefont icon-areachart"></i>53 字</a>
-            <a><i class="nexmoefont icon-time-circle-fill"></i>大概 1 分钟</a>
-        </div>
-
-        <article>
-            
-                <h1 id="有道无术，术尚可求也，有术无道，止于术"><a href="#有道无术，术尚可求也，有术无道，止于术" class="headerlink" title="有道无术，术尚可求也，有术无道，止于术"></a>有道无术，术尚可求也，有术无道，止于术</h1><p>##CFD小白用于做一些自己的总结，顺便提升一下自己写文章的水平，欢迎批评讨论指正<br>wx：13080703991</p>
-
-            
-        </article>
-    </div>
+      <strong>版权声明：</strong>本文采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/cn/deed.zh" target="_blank">CC BY-NC-SA 3.0 CN</a> 协议进行许可
     
+  </div>
+
+
+  
+  
+  <div class="nexmoe-post-meta nexmoe-rainbow">
+    
+    
+</div>
+
+  <div class="nexmoe-post-footer">
+    <section class="nexmoe-comment">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1.5.0/dist/gitalk.min.css">
+<div id="gitalk"></div>
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1.5.0/dist/gitalk.min.js"></script>
+<script type="text/javascript">
+    var gitalk = new Gitalk({
+        clientID: '80b2453b6d5f37ad6225',
+        clientSecret: '43e99fa852795c9a7b3eb924b2558c64b84bbdeb',
+        id: window.location.pathname,
+        repo: 'nexmoe.github.io',
+        owner: 'nexmoe',
+        admin: 'nexmoe'
+    })
+    gitalk.render('gitalk')
+</script>
 </section>
-
+  </div>
+</div>
     </div>
   </div>
   <script src="https://cdn.jsdelivr.net/combine/npm/lazysizes@5.1.0/lazysizes.min.js,gh/highlightjs/cdn-release@9.15.8/build/highlight.min.js,npm/mdui@0.4.3/dist/js/mdui.min.js?v=1"></script>
@@ -440,7 +427,7 @@ patches
 
 
 <script src="https://cdn.jsdelivr.net/gh/xtaodada/xtaodada.github.io@0.0.2/copy.js"></script>
- <script src="/js/app.js?v=1608639671658"></script>
+ <script src="/js/app.js?v=1608639671645"></script>
 
   
 
