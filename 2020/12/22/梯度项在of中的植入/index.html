@@ -12,20 +12,20 @@
   
 
   <link rel="shortcut icon" href="/favicon.ico" type="image/png" />
-  <meta name="description" content="#of中压力梯度在周期性边界条件中的实现参考文献：[1] : https:&#x2F;&#x2F;www.cfd-china.com&#x2F;topic&#x2F;1992&#x2F;cyclic%E5%91%A8%E6%9C%9F%E6%80%A7%E8%BE%B9%E7%95%8C%E6%9D%A1%E4%BB%B6&#x2F;6[2] : https:&#x2F;&#x2F;openfoam.org&#x2F;release&#x2F;2-2-0&#x2F;boundary-conditions&#x2F;">
+  <meta name="description" content="of中压力梯度在周期性边界条件中的实现参考文献：[1] : https:&#x2F;&#x2F;www.cfd-china.com&#x2F;topic&#x2F;1992&#x2F;cyclic%E5%91%A8%E6%9C%9F%E6%80%A7%E8%BE%B9%E7%95%8C%E6%9D%A1%E4%BB%B6&#x2F;6[2] : https:&#x2F;&#x2F;openfoam.org&#x2F;release&#x2F;2-2-0&#x2F;boundary-conditions&#x2F;[">
 <meta property="og:type" content="article">
 <meta property="og:title" content="梯度项在of中的植入">
 <meta property="og:url" content="http://example.com/2020/12/22/%E6%A2%AF%E5%BA%A6%E9%A1%B9%E5%9C%A8of%E4%B8%AD%E7%9A%84%E6%A4%8D%E5%85%A5/index.html">
 <meta property="og:site_name" content="LZF">
-<meta property="og:description" content="#of中压力梯度在周期性边界条件中的实现参考文献：[1] : https:&#x2F;&#x2F;www.cfd-china.com&#x2F;topic&#x2F;1992&#x2F;cyclic%E5%91%A8%E6%9C%9F%E6%80%A7%E8%BE%B9%E7%95%8C%E6%9D%A1%E4%BB%B6&#x2F;6[2] : https:&#x2F;&#x2F;openfoam.org&#x2F;release&#x2F;2-2-0&#x2F;boundary-conditions&#x2F;">
+<meta property="og:description" content="of中压力梯度在周期性边界条件中的实现参考文献：[1] : https:&#x2F;&#x2F;www.cfd-china.com&#x2F;topic&#x2F;1992&#x2F;cyclic%E5%91%A8%E6%9C%9F%E6%80%A7%E8%BE%B9%E7%95%8C%E6%9D%A1%E4%BB%B6&#x2F;6[2] : https:&#x2F;&#x2F;openfoam.org&#x2F;release&#x2F;2-2-0&#x2F;boundary-conditions&#x2F;[">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2020-12-22T07:00:59.000Z">
-<meta property="article:modified_time" content="2020-12-22T09:40:12.000Z">
+<meta property="article:modified_time" content="2020-12-23T03:01:22.000Z">
 <meta property="article:author" content="LZF">
 <meta name="twitter:card" content="summary">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/combine/npm/highlight.js@9.15.8/styles/atom-one-dark.css,gh/nexmoe/nexmoe.github.io@latest/lib/mdui_043tiny/css/mdui.css,gh/nexmoe/nexmoe.github.io@latest/lib/iconfont/iconfont.css,gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css?v=233" crossorigin>
   
-  <link rel="stylesheet" href="/css/style.css?v=1608640245751">
+  <link rel="stylesheet" href="/css/style.css?v=1608698451513">
 <meta name="generator" content="Hexo 5.3.0"></head>
 
 <body class="mdui-drawer-body-left">
@@ -49,7 +49,7 @@
         </a>
     </div>
     <div class="nexmoe-count">
-        <div><span>Articles</span>3</div>
+        <div><span>Articles</span>4</div>
         <div><span>Tags</span>0</div>
         <div><span>Categories</span>0</div>
     </div>
@@ -108,7 +108,7 @@
   <div class="nexmoe-widget-wrap">
     <h3 class="nexmoe-widget-title">Archive</h3>
     <div class="nexmoe-widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/">2020</a><span class="archive-list-count">3</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/">2020</a><span class="archive-list-count">4</span></li></ul>
     </div>
   </div>
 
@@ -152,7 +152,7 @@
   </div>
 
   <article>
-    <p>#of中压力梯度在周期性边界条件中的实现<br>参考文献：<br>[1] : <a target="_blank" rel="noopener" href="https://www.cfd-china.com/topic/1992/cyclic%E5%91%A8%E6%9C%9F%E6%80%A7%E8%BE%B9%E7%95%8C%E6%9D%A1%E4%BB%B6/6">https://www.cfd-china.com/topic/1992/cyclic%E5%91%A8%E6%9C%9F%E6%80%A7%E8%BE%B9%E7%95%8C%E6%9D%A1%E4%BB%B6/6</a><br>[2] : <a target="_blank" rel="noopener" href="https://openfoam.org/release/2-2-0/boundary-conditions/">https://openfoam.org/release/2-2-0/boundary-conditions/</a><br>[3] : <a target="_blank" rel="noopener" href="https://www.cfd-china.com/topic/2121/q-dns%E8%AE%A1%E7%AE%97%E6%A7%BD%E9%81%93%E6%B5%81%E9%81%87%E5%88%B0%E4%BA%86%E4%B8%80%E4%BA%9B%E9%97%AE%E9%A2%98-%E6%B1%82%E5%A4%A7%E7%A5%9E%E4%BB%AC%E6%8C%87%E7%82%B9">https://www.cfd-china.com/topic/2121/q-dns%E8%AE%A1%E7%AE%97%E6%A7%BD%E9%81%93%E6%B5%81%E9%81%87%E5%88%B0%E4%BA%86%E4%B8%80%E4%BA%9B%E9%97%AE%E9%A2%98-%E6%B1%82%E5%A4%A7%E7%A5%9E%E4%BB%AC%E6%8C%87%E7%82%B9</a><br>[4] : <a target="_blank" rel="noopener" href="https://blog.csdn.net/CloudBird07/article/details/105102079">https://blog.csdn.net/CloudBird07/article/details/105102079</a></p>
+    <h1 id="of中压力梯度在周期性边界条件中的实现"><a href="#of中压力梯度在周期性边界条件中的实现" class="headerlink" title="of中压力梯度在周期性边界条件中的实现"></a>of中压力梯度在周期性边界条件中的实现</h1><p>参考文献：<br>[1] : <a target="_blank" rel="noopener" href="https://www.cfd-china.com/topic/1992/cyclic%E5%91%A8%E6%9C%9F%E6%80%A7%E8%BE%B9%E7%95%8C%E6%9D%A1%E4%BB%B6/6">https://www.cfd-china.com/topic/1992/cyclic%E5%91%A8%E6%9C%9F%E6%80%A7%E8%BE%B9%E7%95%8C%E6%9D%A1%E4%BB%B6/6</a><br>[2] : <a target="_blank" rel="noopener" href="https://openfoam.org/release/2-2-0/boundary-conditions/">https://openfoam.org/release/2-2-0/boundary-conditions/</a><br>[3] : <a target="_blank" rel="noopener" href="https://www.cfd-china.com/topic/2121/q-dns%E8%AE%A1%E7%AE%97%E6%A7%BD%E9%81%93%E6%B5%81%E9%81%87%E5%88%B0%E4%BA%86%E4%B8%80%E4%BA%9B%E9%97%AE%E9%A2%98-%E6%B1%82%E5%A4%A7%E7%A5%9E%E4%BB%AC%E6%8C%87%E7%82%B9">https://www.cfd-china.com/topic/2121/q-dns%E8%AE%A1%E7%AE%97%E6%A7%BD%E9%81%93%E6%B5%81%E9%81%87%E5%88%B0%E4%BA%86%E4%B8%80%E4%BA%9B%E9%97%AE%E9%A2%98-%E6%B1%82%E5%A4%A7%E7%A5%9E%E4%BB%AC%E6%8C%87%E7%82%B9</a><br>[4] : <a target="_blank" rel="noopener" href="https://blog.csdn.net/CloudBird07/article/details/105102079">https://blog.csdn.net/CloudBird07/article/details/105102079</a></p>
 <iframe src="//player.bilibili.com/player.html?aid=330155473&bvid=BV1LA411j7Nb&cid=252146163&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
 
 <p>1.设置周期型边界条件需要使用cyclic边界条件并指定cyclic边界条件的类型，利用snappyHexMesh生成网格以及边界后进入ployMesh文件夹中编辑boundary文件，将想要设置为周期性边界条件的边界设置为cyclic并设置好他们的相邻边界，这里值得一提的是需要放大matchToTolerance的值方便之后createPatch的设定</p>
@@ -427,7 +427,7 @@ patches
 
 
 <script src="https://cdn.jsdelivr.net/gh/xtaodada/xtaodada.github.io@0.0.2/copy.js"></script>
- <script src="/js/app.js?v=1608640245755"></script>
+ <script src="/js/app.js?v=1608698451518"></script>
 
   
 

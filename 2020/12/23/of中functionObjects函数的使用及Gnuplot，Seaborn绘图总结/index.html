@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+  
+  <title>of中functionObjects函数的使用及Gnuplot，Seaborn绘图总结（未完待续） - LZF</title>
+  <meta charset="UTF-8">
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
+  
+  
+
+  <link rel="shortcut icon" href="/favicon.ico" type="image/png" />
+  <meta name="description" content="postProcess与functionObjectsOpenFoam分为两种后处理方法，一种是传统的postProcess方法，在求解后使用；另一种方法是在运行时进行处理的Co-processing,方法是在controlDict文件夹之中添加functionObjests1.postProcess -func sampleDict输入postProcess -list来进行查看可实行后处理的目">
+<meta property="og:type" content="article">
+<meta property="og:title" content="of中functionObjects函数的使用及Gnuplot，Seaborn绘图总结（未完待续）">
+<meta property="og:url" content="http://example.com/2020/12/23/of%E4%B8%ADfunctionObjects%E5%87%BD%E6%95%B0%E7%9A%84%E4%BD%BF%E7%94%A8%E5%8F%8AGnuplot%EF%BC%8CSeaborn%E7%BB%98%E5%9B%BE%E6%80%BB%E7%BB%93/index.html">
+<meta property="og:site_name" content="LZF">
+<meta property="og:description" content="postProcess与functionObjectsOpenFoam分为两种后处理方法，一种是传统的postProcess方法，在求解后使用；另一种方法是在运行时进行处理的Co-processing,方法是在controlDict文件夹之中添加functionObjests1.postProcess -func sampleDict输入postProcess -list来进行查看可实行后处理的目">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://lh3.googleusercontent.com/R2YWdLYk5krtgjrZX0RylBAqPx_Aso1oJiEB_wQlk432JG81K_qZe9XtjIoW4ZrSqUMLhV_be-UKdUpt-6Wih2VPXKQq3Gk3u7f8qhrcrbaN8IBy0H_SqZAx7wiUXuLxx_kMhGaGghlOaMm2XFN-W8v-vUE0MKFiZKuHYlMmAK6UIoCr6lkdTpwmPqUlZcVuvVRTEFcrUTLY5oGCUy7VC7xlLxhuxRC6cRO9K2iJglM6IXTWJloINAuCk0sxRzvWUWWCyDxxtB3vW3B2n-b1R-X7g3Q304dC6R3cxM1RgEZIEKy6LrNFL3HrhKSBHzqwVAEjxUTWJoNBI5hz3nzZl0RldqEn_cA4yvagxM18_QlBZBLMhBAUpjnY_a7_i9q6nGAljpvxLKUoSSKHPeOtNDf5hgcZGq3IbVNUqLq6ypIbG2-kOmdLpSplI2am-xEFYcrwFCxL1pu-Pztom1XCkMHWuhq6OHiAatMo8pkMr1TKXimpR8YeA5JvXvDVJjW29iytQBrUNiyGiEBSMWQYnNzNSUKhVbMHzNm82Q7YuHN0H4NKYAJ3Oq-fkIblBa0RxvxC-82-tuLldhf4YtCxjT2zHuSJZIg6gPXwn-_gvtecc_VfRYHenRpGjw34Lf1_txohGNfB8TI78srZaJkcJ-FRy6takrgwkJsCo3OeEtffNCP5FoVZRs626PiO=w308-h440-no?authuser=0">
+<meta property="article:published_time" content="2020-12-23T02:56:34.000Z">
+<meta property="article:modified_time" content="2020-12-23T04:40:42.000Z">
+<meta property="article:author" content="LZF">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://lh3.googleusercontent.com/R2YWdLYk5krtgjrZX0RylBAqPx_Aso1oJiEB_wQlk432JG81K_qZe9XtjIoW4ZrSqUMLhV_be-UKdUpt-6Wih2VPXKQq3Gk3u7f8qhrcrbaN8IBy0H_SqZAx7wiUXuLxx_kMhGaGghlOaMm2XFN-W8v-vUE0MKFiZKuHYlMmAK6UIoCr6lkdTpwmPqUlZcVuvVRTEFcrUTLY5oGCUy7VC7xlLxhuxRC6cRO9K2iJglM6IXTWJloINAuCk0sxRzvWUWWCyDxxtB3vW3B2n-b1R-X7g3Q304dC6R3cxM1RgEZIEKy6LrNFL3HrhKSBHzqwVAEjxUTWJoNBI5hz3nzZl0RldqEn_cA4yvagxM18_QlBZBLMhBAUpjnY_a7_i9q6nGAljpvxLKUoSSKHPeOtNDf5hgcZGq3IbVNUqLq6ypIbG2-kOmdLpSplI2am-xEFYcrwFCxL1pu-Pztom1XCkMHWuhq6OHiAatMo8pkMr1TKXimpR8YeA5JvXvDVJjW29iytQBrUNiyGiEBSMWQYnNzNSUKhVbMHzNm82Q7YuHN0H4NKYAJ3Oq-fkIblBa0RxvxC-82-tuLldhf4YtCxjT2zHuSJZIg6gPXwn-_gvtecc_VfRYHenRpGjw34Lf1_txohGNfB8TI78srZaJkcJ-FRy6takrgwkJsCo3OeEtffNCP5FoVZRs626PiO=w308-h440-no?authuser=0">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/combine/npm/highlight.js@9.15.8/styles/atom-one-dark.css,gh/nexmoe/nexmoe.github.io@latest/lib/mdui_043tiny/css/mdui.css,gh/nexmoe/nexmoe.github.io@latest/lib/iconfont/iconfont.css,gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css?v=233" crossorigin>
+  
+  <link rel="stylesheet" href="/css/style.css?v=1608698451495">
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+<body class="mdui-drawer-body-left">
+  
+  <div id="nexmoe-background">
+    <div class="nexmoe-bg" style="background-image: url(https://w.wallhaven.cc/full/x1/wallhaven-x1272z.jpg)"></div>
+    <div class="mdui-appbar mdui-shadow-0">
+      <div class="mdui-toolbar">
+        <a mdui-drawer="{target: '#drawer', swipe: true}" title="menu" class="mdui-btn mdui-btn-icon mdui-ripple"><i class="mdui-icon nexmoefont icon-menu"></i></a>
+        <div class="mdui-toolbar-spacer"></div>
+        <!--<a href="javascript:;" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">search</i></a>-->
+        <a href="/" title="LZF" class="mdui-btn mdui-btn-icon"><img src="https://i0.hdslb.com/bfs/bigfun/2f8032d8b78d23c8e81893fdc73761caeb61a8cb.jpg@800w_1o" alt="LZF"></a>
+       </div>
+    </div>
+  </div>
+  <div id="nexmoe-header">
+      <div class="nexmoe-drawer mdui-drawer" id="drawer">
+    <div class="nexmoe-avatar mdui-ripple">
+        <a href="/" title="LZF">
+            <img src="https://i0.hdslb.com/bfs/bigfun/2f8032d8b78d23c8e81893fdc73761caeb61a8cb.jpg@800w_1o" alt="LZF" alt="LZF">
+        </a>
+    </div>
+    <div class="nexmoe-count">
+        <div><span>Articles</span>4</div>
+        <div><span>Tags</span>0</div>
+        <div><span>Categories</span>0</div>
+    </div>
+    <div class="nexmoe-list mdui-list" mdui-collapse="{accordion: true}">
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple" href="/" title="回到首页">
+            <i class="mdui-list-item-icon nexmoefont icon-home"></i>
+            <div class="mdui-list-item-content">
+                回到首页
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple" href="/about.html" title="关于博客">
+            <i class="mdui-list-item-icon nexmoefont icon-info-circle"></i>
+            <div class="mdui-list-item-content">
+                关于博客
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple" href="/PY.html" title="我的朋友">
+            <i class="mdui-list-item-icon nexmoefont icon-unorderedlist"></i>
+            <div class="mdui-list-item-content">
+                我的朋友
+            </div>
+        </a>
+        
+    </div>
+    <aside id="nexmoe-sidebar">
+  
+  <div class="nexmoe-widget-wrap">
+    <div class="nexmoe-widget nexmoe-search">
+        <form id="search_form" action_e="https://cn.bing.com/search?q=https://github.com/LZF1111/lzf1111.github.io.git" onsubmit="return search();">
+            <label><input id="search_value" name="q" type="search" placeholder="Search"></label>
+        </form>
+    </div>
+</div>
+  
+  <div class="nexmoe-widget-wrap">
+    <div class="nexmoe-widget nexmoe-social">
+        <a class="mdui-ripple" href="https://jq.qq.com/?_wv=1027&k=K7fNcEdW" target="_blank" mdui-tooltip="{content: 'QQ'}" style="color: rgb(249, 174, 8);background-color: rgba(249, 174, 8, .1);">
+            <i class="nexmoefont icon-QQ"></i>
+        </a><a class="mdui-ripple" href="https://space.bilibili.com/26951334" target="_blank" mdui-tooltip="{content: '哔哩哔哩'}" style="color: rgb(231, 106, 141);background-color: rgba(231, 106, 141, .15);">
+            <i class="nexmoefont icon-bilibili"></i>
+        </a><a class="mdui-ripple" href="https://github.com/LZF1111" target="_blank" mdui-tooltip="{content: 'GitHub'}" style="color: rgb(25, 23, 23);background-color: rgba(25, 23, 23, .15);">
+            <i class="nexmoefont icon-github"></i>
+        </a>
+    </div>
+</div>
+  
+  
+
+  
+  
+  
+  
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">Archive</h3>
+    <div class="nexmoe-widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/">2020</a><span class="archive-list-count">4</span></li></ul>
+    </div>
+  </div>
+
+
+<style>
+.nexmoe-widget .archive-list-count{
+	position : absolute;
+	right: 15px;
+	top:9px;
+	color: #DDD;
+}
+</style>
+
+  
+</aside>
+    <div class="nexmoe-copyright">
+        &copy; 2020 LZF
+        Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+        & <a href="https://github.com/theme-nexmoe/hexo-theme-nexmoe" target="_blank">Nexmoe</a>
+    </div>
+</div><!-- .nexmoe-drawer -->
+  </div>
+  <div id="nexmoe-content">
+    <div class="nexmoe-primary">
+        <div class="nexmoe-post">
+  
+      <div class="nexmoe-post-cover" style="padding-bottom: 62.5%;"> 
+          <img data-src="https://w.wallhaven.cc/full/g8/wallhaven-g8wel3.png" data-sizes="auto" alt="of中functionObjects函数的使用及Gnuplot，Seaborn绘图总结（未完待续）" class="lazyload">
+          <h1>of中functionObjects函数的使用及Gnuplot，Seaborn绘图总结（未完待续）</h1>
+      </div>
+  
+  
+  <div class="nexmoe-post-meta nexmoe-rainbow" style="margin:10px 0!important;">
+    <a><i class="nexmoefont icon-calendar-fill"></i>2020年12月23日</a>
+    <a><i class="nexmoefont icon-areachart"></i>558 字</a>
+    <a><i class="nexmoefont icon-time-circle-fill"></i>大概 2 分钟</a>
+</div>
+
+  <div class="nexmoe-post-right">
+    
+  </div>
+
+  <article>
+    <h2 id="postProcess与functionObjects"><a href="#postProcess与functionObjects" class="headerlink" title="postProcess与functionObjects"></a>postProcess与functionObjects</h2><p>OpenFoam分为两种后处理方法，一种是传统的postProcess方法，在求解后使用；另一种方法是在运行时进行处理的Co-processing,方法是在controlDict文件夹之中添加functionObjests<br>1.postProcess -func sampleDict<br>输入<code>postProcess -list</code>来进行查看可实行后处理的目录<br>在system文件夹下添加sampleDict文件，文件格式例子如下</p>
+<pre><code>// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+type sets;
+
+setFormat raw;
+
+interpolationScheme cellPointFace;
+
+fields
+(
+    U
+);
+
+sets
+(
+
+    l1
+    &#123;
+        type            lineCellFace;
+        axis            x;
+        start           ( -1  0.5 0);
+        end             ( 2  0.5 0);
+    &#125;
+
+    l2
+    &#123;
+        type            lineCellFace;
+        axis            y;
+        start           (0.5 -1 0);
+        end             (0.5 2 0);
+    &#125;
+
+);
+
+// *********************************************************************** //</code></pre>
+<p>此文件指定两条箭头线，在在计算域中对线上进行取样```输入postProcess -func sampleDict -latestTime``命令进行对于最后一个时间步的采样工作，其结果会输出在postProcessing文件夹之中</p>
+<p>建立gnuplot文件夹，在其下建立gnuplot_script文件去设置gnuplot脚本</p>
+<pre><code>set terminal qt 0//设置输出第一个窗口为0
+
+#set multiplot layout 2,1
+
+#set grid xtics//打网格
+#set grid ytics
+#set grid mxtics
+#set grid mytics
+
+set key left//图例放在左边，有left 和right两个选项；
+set ylabel &quot;Y centerline&quot;//设置纵坐标
+set xlabel &quot;UX&quot;//设置横坐标
+plot &#39;gnuplot/UX_yline&#39; u 2:1 w lp pt 7 title &#39;Ghia et al.&#39;,&#39;./postProcessing/sampleDict/50/l2_U.xy&#39; u 2:1 pt 6 title &#39;Current solution&#39;
+
+例子：plot  &#39;.\line_rhoe1.xy&#39; u 1:2  w lp lw 2 lt 2 pt 1 lc rgb &quot;black&quot; ,\
+&#39;.\line_rhoe2.xy&#39; u 1:2  w l lw 2 lc rgb &quot;black&quot; 
+
+#u 1:2 使用第一列数据为x轴，第二列数据为y轴 还可以进行运算 例如 u 1:($2)/($3)
+#w lp 绘制数据点和数据线 w l 仅绘制数据线 w p仅绘制数据点
+#lt/pt 2 点和线的绘制风格 lt0是虚线 可以使用dt命令设置其他点划线类型
+# lc 线的颜色，同样会将该颜色设置给点
+# 在gnuplot终端输入test可以快速查看所有电线风格
+
+
+
+set terminal qt 1
+
+set key default
+set xlabel &quot;X centerline&quot;
+set ylabel &quot;UY&quot;
+plot &#39;gnuplot/UY_xline&#39; u 1:2 w lp pt 7 title &#39;Ghia et al.&#39;,&#39;./postProcessing/sampleDict/50/l1_U.xy&#39; u 1:3 pt 6 title &#39;Current solution&#39;
+
+#unset multiplot
+
+
+
+pause -1
+
+#    EOF
+
+参考文献：[1]: https://blog.csdn.net/CloudBird07/article/details/106751196/</code></pre>
+<div align=center>
+
+<p><img src="https://lh3.googleusercontent.com/R2YWdLYk5krtgjrZX0RylBAqPx_Aso1oJiEB_wQlk432JG81K_qZe9XtjIoW4ZrSqUMLhV_be-UKdUpt-6Wih2VPXKQq3Gk3u7f8qhrcrbaN8IBy0H_SqZAx7wiUXuLxx_kMhGaGghlOaMm2XFN-W8v-vUE0MKFiZKuHYlMmAK6UIoCr6lkdTpwmPqUlZcVuvVRTEFcrUTLY5oGCUy7VC7xlLxhuxRC6cRO9K2iJglM6IXTWJloINAuCk0sxRzvWUWWCyDxxtB3vW3B2n-b1R-X7g3Q304dC6R3cxM1RgEZIEKy6LrNFL3HrhKSBHzqwVAEjxUTWJoNBI5hz3nzZl0RldqEn_cA4yvagxM18_QlBZBLMhBAUpjnY_a7_i9q6nGAljpvxLKUoSSKHPeOtNDf5hgcZGq3IbVNUqLq6ypIbG2-kOmdLpSplI2am-xEFYcrwFCxL1pu-Pztom1XCkMHWuhq6OHiAatMo8pkMr1TKXimpR8YeA5JvXvDVJjW29iytQBrUNiyGiEBSMWQYnNzNSUKhVbMHzNm82Q7YuHN0H4NKYAJ3Oq-fkIblBa0RxvxC-82-tuLldhf4YtCxjT2zHuSJZIg6gPXwn-_gvtecc_VfRYHenRpGjw34Lf1_txohGNfB8TI78srZaJkcJ-FRy6takrgwkJsCo3OeEtffNCP5FoVZRs626PiO=w308-h440-no?authuser=0"></p>
+
+  </article>
+
+  
+    
+  <div class="nexmoe-post-copyright">
+    <strong>Author：</strong>LZF<br>
+    <strong>Link：</strong><a href="http://example.com/2020/12/23/of%E4%B8%ADfunctionObjects%E5%87%BD%E6%95%B0%E7%9A%84%E4%BD%BF%E7%94%A8%E5%8F%8AGnuplot%EF%BC%8CSeaborn%E7%BB%98%E5%9B%BE%E6%80%BB%E7%BB%93/" title="http:&#x2F;&#x2F;example.com&#x2F;2020&#x2F;12&#x2F;23&#x2F;of%E4%B8%ADfunctionObjects%E5%87%BD%E6%95%B0%E7%9A%84%E4%BD%BF%E7%94%A8%E5%8F%8AGnuplot%EF%BC%8CSeaborn%E7%BB%98%E5%9B%BE%E6%80%BB%E7%BB%93&#x2F;" target="_blank" rel="noopener">http:&#x2F;&#x2F;example.com&#x2F;2020&#x2F;12&#x2F;23&#x2F;of%E4%B8%ADfunctionObjects%E5%87%BD%E6%95%B0%E7%9A%84%E4%BD%BF%E7%94%A8%E5%8F%8AGnuplot%EF%BC%8CSeaborn%E7%BB%98%E5%9B%BE%E6%80%BB%E7%BB%93&#x2F;</a><br>
+    
+      <strong>版权声明：</strong>本文采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/cn/deed.zh" target="_blank">CC BY-NC-SA 3.0 CN</a> 协议进行许可
+    
+  </div>
+
+
+  
+  
+  <div class="nexmoe-post-meta nexmoe-rainbow">
+    
+    
+</div>
+
+  <div class="nexmoe-post-footer">
+    <section class="nexmoe-comment">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1.5.0/dist/gitalk.min.css">
+<div id="gitalk"></div>
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1.5.0/dist/gitalk.min.js"></script>
+<script type="text/javascript">
+    var gitalk = new Gitalk({
+        clientID: '80b2453b6d5f37ad6225',
+        clientSecret: '43e99fa852795c9a7b3eb924b2558c64b84bbdeb',
+        id: window.location.pathname,
+        repo: 'nexmoe.github.io',
+        owner: 'nexmoe',
+        admin: 'nexmoe'
+    })
+    gitalk.render('gitalk')
+</script>
+</section>
+  </div>
+</div>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/combine/npm/lazysizes@5.1.0/lazysizes.min.js,gh/highlightjs/cdn-release@9.15.8/build/highlight.min.js,npm/mdui@0.4.3/dist/js/mdui.min.js?v=1"></script>
+<script>
+	hljs.initHighlightingOnLoad();
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+
+
+<script src="https://cdn.jsdelivr.net/gh/xtaodada/xtaodada.github.io@0.0.2/copy.js"></script>
+ <script src="/js/app.js?v=1608698451499"></script>
+
+  
+
+
+
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+</body>
+
+</html>
