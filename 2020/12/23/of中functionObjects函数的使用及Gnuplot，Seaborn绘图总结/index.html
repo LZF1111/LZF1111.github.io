@@ -12,23 +12,23 @@
   
 
   <link rel="shortcut icon" href="/favicon.ico" type="image/png" />
-  <meta name="description" content="postProcess与functionObjectsOpenFoam分为两种后处理方法，一种是传统的postProcess方法，在求解后使用；另一种方法是在运行时进行处理的Co-processing,方法是在controlDict文件夹之中添加functionObjests，但有时可能事先忘记了在controlDict字典中定义functionObject，导致计算完毕后数据并未提取出来。Ope">
+  <meta name="description" content="1.postProcess与functionObjects">
 <meta property="og:type" content="article">
 <meta property="og:title" content="of中functionObjects函数的使用及Gnuplot，Seaborn绘图总结（未完待续）">
 <meta property="og:url" content="http://example.com/2020/12/23/of%E4%B8%ADfunctionObjects%E5%87%BD%E6%95%B0%E7%9A%84%E4%BD%BF%E7%94%A8%E5%8F%8AGnuplot%EF%BC%8CSeaborn%E7%BB%98%E5%9B%BE%E6%80%BB%E7%BB%93/index.html">
 <meta property="og:site_name" content="LZF">
-<meta property="og:description" content="postProcess与functionObjectsOpenFoam分为两种后处理方法，一种是传统的postProcess方法，在求解后使用；另一种方法是在运行时进行处理的Co-processing,方法是在controlDict文件夹之中添加functionObjests，但有时可能事先忘记了在controlDict字典中定义functionObject，导致计算完毕后数据并未提取出来。Ope">
+<meta property="og:description" content="1.postProcess与functionObjects">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://lh3.googleusercontent.com/R2YWdLYk5krtgjrZX0RylBAqPx_Aso1oJiEB_wQlk432JG81K_qZe9XtjIoW4ZrSqUMLhV_be-UKdUpt-6Wih2VPXKQq3Gk3u7f8qhrcrbaN8IBy0H_SqZAx7wiUXuLxx_kMhGaGghlOaMm2XFN-W8v-vUE0MKFiZKuHYlMmAK6UIoCr6lkdTpwmPqUlZcVuvVRTEFcrUTLY5oGCUy7VC7xlLxhuxRC6cRO9K2iJglM6IXTWJloINAuCk0sxRzvWUWWCyDxxtB3vW3B2n-b1R-X7g3Q304dC6R3cxM1RgEZIEKy6LrNFL3HrhKSBHzqwVAEjxUTWJoNBI5hz3nzZl0RldqEn_cA4yvagxM18_QlBZBLMhBAUpjnY_a7_i9q6nGAljpvxLKUoSSKHPeOtNDf5hgcZGq3IbVNUqLq6ypIbG2-kOmdLpSplI2am-xEFYcrwFCxL1pu-Pztom1XCkMHWuhq6OHiAatMo8pkMr1TKXimpR8YeA5JvXvDVJjW29iytQBrUNiyGiEBSMWQYnNzNSUKhVbMHzNm82Q7YuHN0H4NKYAJ3Oq-fkIblBa0RxvxC-82-tuLldhf4YtCxjT2zHuSJZIg6gPXwn-_gvtecc_VfRYHenRpGjw34Lf1_txohGNfB8TI78srZaJkcJ-FRy6takrgwkJsCo3OeEtffNCP5FoVZRs626PiO=w308-h440-no?authuser=0">
+<meta property="og:image" content="https://lh3.googleusercontent.com/1fsTg1Hro3o6V24-kT6MdQ7mssOYhPjGExmuN7koUu0EOlzsTxIJEFvb4z0uS3tkHVtncOJDVKqjufwFgTr3Csqzyx4kHblwoxR8aMRuuXwY5DQ23DhOvoqFNej8tsjo65bc-Njy-edbgPVdyBzz-y7akqyCy2JLcj1K3yrwWFxTLMIoU3SO7h_sRvFBwOkWC9QjDTWqaak-kHNHVkLz8AR_AJleqV_aJHycgchEpBRslrd00ZGA1dHC-AKwIa_m6ZzST7H-VGqp0GbFEIEcTdVT4afHKkxJrIuMLmV8LaQwExuJRRY1ML-uTexV4O40ThpuSFWDkmA5Kd0d3YxcO7vZnIxgOZVZw2PhntM1a8gd9JFhg0zQDPkkkdKTAH3fhSsh92j_2tmdpdfGofaF5p7ABbGTM1rvkd8sZmGrXPv_eBtZKoCzboY_5oV_HCk8p305VQR5b0BcqizrqYddJmma53jrf2oF41mgxOFv13tIvUErmANLh6OIvYUry97MPnmtVBMO0Ve0CnGCp4oShbdzc7e867KF0H_Xw3n9eQpWmKhq8bmYl0eJ2IotqYyQuDXLpFeUqvEbtrdaQEwC-PfoRh-f7XIWNZHeXiMdQao3MZY6PhmQHbc5wb7aJNe39o1RxuWEs4qKgRJCduaqbdXw9YfG6VGr0vgGNezKUawOY_mI3iA-TFXTcNuJ=w631-h451-no?authuser=0">
 <meta property="og:image" content="https://w.wallhaven.cc/full/0p/wallhaven-0pj79j.jpg">
 <meta property="article:published_time" content="2020-12-23T02:56:34.000Z">
-<meta property="article:modified_time" content="2020-12-24T08:29:50.000Z">
+<meta property="article:modified_time" content="2020-12-24T09:09:30.000Z">
 <meta property="article:author" content="LZF">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://lh3.googleusercontent.com/R2YWdLYk5krtgjrZX0RylBAqPx_Aso1oJiEB_wQlk432JG81K_qZe9XtjIoW4ZrSqUMLhV_be-UKdUpt-6Wih2VPXKQq3Gk3u7f8qhrcrbaN8IBy0H_SqZAx7wiUXuLxx_kMhGaGghlOaMm2XFN-W8v-vUE0MKFiZKuHYlMmAK6UIoCr6lkdTpwmPqUlZcVuvVRTEFcrUTLY5oGCUy7VC7xlLxhuxRC6cRO9K2iJglM6IXTWJloINAuCk0sxRzvWUWWCyDxxtB3vW3B2n-b1R-X7g3Q304dC6R3cxM1RgEZIEKy6LrNFL3HrhKSBHzqwVAEjxUTWJoNBI5hz3nzZl0RldqEn_cA4yvagxM18_QlBZBLMhBAUpjnY_a7_i9q6nGAljpvxLKUoSSKHPeOtNDf5hgcZGq3IbVNUqLq6ypIbG2-kOmdLpSplI2am-xEFYcrwFCxL1pu-Pztom1XCkMHWuhq6OHiAatMo8pkMr1TKXimpR8YeA5JvXvDVJjW29iytQBrUNiyGiEBSMWQYnNzNSUKhVbMHzNm82Q7YuHN0H4NKYAJ3Oq-fkIblBa0RxvxC-82-tuLldhf4YtCxjT2zHuSJZIg6gPXwn-_gvtecc_VfRYHenRpGjw34Lf1_txohGNfB8TI78srZaJkcJ-FRy6takrgwkJsCo3OeEtffNCP5FoVZRs626PiO=w308-h440-no?authuser=0">
+<meta name="twitter:image" content="https://lh3.googleusercontent.com/1fsTg1Hro3o6V24-kT6MdQ7mssOYhPjGExmuN7koUu0EOlzsTxIJEFvb4z0uS3tkHVtncOJDVKqjufwFgTr3Csqzyx4kHblwoxR8aMRuuXwY5DQ23DhOvoqFNej8tsjo65bc-Njy-edbgPVdyBzz-y7akqyCy2JLcj1K3yrwWFxTLMIoU3SO7h_sRvFBwOkWC9QjDTWqaak-kHNHVkLz8AR_AJleqV_aJHycgchEpBRslrd00ZGA1dHC-AKwIa_m6ZzST7H-VGqp0GbFEIEcTdVT4afHKkxJrIuMLmV8LaQwExuJRRY1ML-uTexV4O40ThpuSFWDkmA5Kd0d3YxcO7vZnIxgOZVZw2PhntM1a8gd9JFhg0zQDPkkkdKTAH3fhSsh92j_2tmdpdfGofaF5p7ABbGTM1rvkd8sZmGrXPv_eBtZKoCzboY_5oV_HCk8p305VQR5b0BcqizrqYddJmma53jrf2oF41mgxOFv13tIvUErmANLh6OIvYUry97MPnmtVBMO0Ve0CnGCp4oShbdzc7e867KF0H_Xw3n9eQpWmKhq8bmYl0eJ2IotqYyQuDXLpFeUqvEbtrdaQEwC-PfoRh-f7XIWNZHeXiMdQao3MZY6PhmQHbc5wb7aJNe39o1RxuWEs4qKgRJCduaqbdXw9YfG6VGr0vgGNezKUawOY_mI3iA-TFXTcNuJ=w631-h451-no?authuser=0">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/combine/npm/highlight.js@9.15.8/styles/atom-one-dark.css,gh/nexmoe/nexmoe.github.io@latest/lib/mdui_043tiny/css/mdui.css,gh/nexmoe/nexmoe.github.io@latest/lib/iconfont/iconfont.css,gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css?v=233" crossorigin>
   
-  <link rel="stylesheet" href="/css/style.css?v=1608798634773">
+  <link rel="stylesheet" href="/css/style.css?v=1608800989886">
 <meta name="generator" content="Hexo 5.3.0"></head>
 
 <body class="mdui-drawer-body-left">
@@ -155,7 +155,8 @@
   </div>
 
   <article>
-    <h2 id="postProcess与functionObjects"><a href="#postProcess与functionObjects" class="headerlink" title="postProcess与functionObjects"></a>postProcess与functionObjects</h2><p>OpenFoam分为两种后处理方法，一种是传统的postProcess方法，在求解后使用；另一种方法是在运行时进行处理的Co-processing,方法是在controlDict文件夹之中添加functionObjests，但有时可能事先忘记了在controlDict字典中定义functionObject，导致计算完毕后数据并未提取出来。OpenFOAM允许用户在求解计算完毕后执行functionObject，此时可以在controlDict文件中添加functionObject，然后利用命令提取数据。这里总结几个经常使用的后处理实用程序。<br>1.sampleDict文件<br>functionObject可以在求解过程中输出指定的物理量信息。当求解计算完毕后，可以选择使用Sampling获取特定位置物理信息，此时主要使用postProcess程序来实现。<br>输入<code>postProcess -list</code>来进行查看可实行后处理的目录<br>在system文件夹下添加sampleDict文件，文件格式例子如下</p>
+    <h2 id="1-postProcess与functionObjects"><a href="#1-postProcess与functionObjects" class="headerlink" title="1.postProcess与functionObjects"></a>1.postProcess与functionObjects</h2><a id="more"></a>
+<p>OpenFoam分为两种后处理方法，一种是传统的postProcess方法，在求解后使用；另一种方法是在运行时进行处理的Co-processing,方法是在controlDict文件夹之中添加functionObjests，但有时可能事先忘记了在controlDict字典中定义functionObject，导致计算完毕后数据并未提取出来。OpenFOAM允许用户在求解计算完毕后执行functionObject，此时可以在controlDict文件中添加functionObject，然后利用命令提取数据。这里总结几个经常使用的后处理实用程序。<br>1.sampleDict文件<br>functionObject可以在求解过程中输出指定的物理量信息。当求解计算完毕后，可以选择使用Sampling获取特定位置物理信息，此时主要使用postProcess程序来实现。<br>输入<code>postProcess -list</code>来进行查看可实行后处理的目录<br>在system文件夹下添加sampleDict文件，文件格式例子如下</p>
 <pre><code>// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
 type sets;
@@ -234,7 +235,7 @@ pause -1
 #    EOF
 
 参考文献：[1]: https://blog.csdn.net/CloudBird07/article/details/106751196/</code></pre>
-<div align=center><img src="https://lh3.googleusercontent.com/R2YWdLYk5krtgjrZX0RylBAqPx_Aso1oJiEB_wQlk432JG81K_qZe9XtjIoW4ZrSqUMLhV_be-UKdUpt-6Wih2VPXKQq3Gk3u7f8qhrcrbaN8IBy0H_SqZAx7wiUXuLxx_kMhGaGghlOaMm2XFN-W8v-vUE0MKFiZKuHYlMmAK6UIoCr6lkdTpwmPqUlZcVuvVRTEFcrUTLY5oGCUy7VC7xlLxhuxRC6cRO9K2iJglM6IXTWJloINAuCk0sxRzvWUWWCyDxxtB3vW3B2n-b1R-X7g3Q304dC6R3cxM1RgEZIEKy6LrNFL3HrhKSBHzqwVAEjxUTWJoNBI5hz3nzZl0RldqEn_cA4yvagxM18_QlBZBLMhBAUpjnY_a7_i9q6nGAljpvxLKUoSSKHPeOtNDf5hgcZGq3IbVNUqLq6ypIbG2-kOmdLpSplI2am-xEFYcrwFCxL1pu-Pztom1XCkMHWuhq6OHiAatMo8pkMr1TKXimpR8YeA5JvXvDVJjW29iytQBrUNiyGiEBSMWQYnNzNSUKhVbMHzNm82Q7YuHN0H4NKYAJ3Oq-fkIblBa0RxvxC-82-tuLldhf4YtCxjT2zHuSJZIg6gPXwn-_gvtecc_VfRYHenRpGjw34Lf1_txohGNfB8TI78srZaJkcJ-FRy6takrgwkJsCo3OeEtffNCP5FoVZRs626PiO=w308-h440-no?authuser=0" width="70%" height="50%"></div>
+<div align=center><img src="https://lh3.googleusercontent.com/1fsTg1Hro3o6V24-kT6MdQ7mssOYhPjGExmuN7koUu0EOlzsTxIJEFvb4z0uS3tkHVtncOJDVKqjufwFgTr3Csqzyx4kHblwoxR8aMRuuXwY5DQ23DhOvoqFNej8tsjo65bc-Njy-edbgPVdyBzz-y7akqyCy2JLcj1K3yrwWFxTLMIoU3SO7h_sRvFBwOkWC9QjDTWqaak-kHNHVkLz8AR_AJleqV_aJHycgchEpBRslrd00ZGA1dHC-AKwIa_m6ZzST7H-VGqp0GbFEIEcTdVT4afHKkxJrIuMLmV8LaQwExuJRRY1ML-uTexV4O40ThpuSFWDkmA5Kd0d3YxcO7vZnIxgOZVZw2PhntM1a8gd9JFhg0zQDPkkkdKTAH3fhSsh92j_2tmdpdfGofaF5p7ABbGTM1rvkd8sZmGrXPv_eBtZKoCzboY_5oV_HCk8p305VQR5b0BcqizrqYddJmma53jrf2oF41mgxOFv13tIvUErmANLh6OIvYUry97MPnmtVBMO0Ve0CnGCp4oShbdzc7e867KF0H_Xw3n9eQpWmKhq8bmYl0eJ2IotqYyQuDXLpFeUqvEbtrdaQEwC-PfoRh-f7XIWNZHeXiMdQao3MZY6PhmQHbc5wb7aJNe39o1RxuWEs4qKgRJCduaqbdXw9YfG6VGr0vgGNezKUawOY_mI3iA-TFXTcNuJ=w631-h451-no?authuser=0" width="70%" height="50%"></div>
 
 <p>2.probesDict文件</p>
 <pre><code>FoamFile
@@ -633,7 +634,7 @@ actions
 
 
 <script src="https://cdn.jsdelivr.net/gh/xtaodada/xtaodada.github.io@0.0.2/copy.js"></script>
- <script src="/js/app.js?v=1608798634782"></script>
+ <script src="/js/app.js?v=1608800989893"></script>
 
   
 
