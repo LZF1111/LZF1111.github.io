@@ -21,7 +21,7 @@
 <meta name="twitter:card" content="summary">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/combine/npm/highlight.js@9.15.8/styles/atom-one-dark.css,gh/nexmoe/nexmoe.github.io@latest/lib/mdui_043tiny/css/mdui.css,gh/nexmoe/nexmoe.github.io@latest/lib/iconfont/iconfont.css,gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css?v=233" crossorigin>
   
-  <link rel="stylesheet" href="/css/style.css?v=1608804044596">
+  <link rel="stylesheet" href="/css/style.css?v=1608809160752">
 <meta name="generator" content="Hexo 5.3.0"></head>
 
 <body class="mdui-drawer-body-left">
@@ -45,7 +45,7 @@
         </a>
     </div>
     <div class="nexmoe-count">
-        <div><span>Articles</span>4</div>
+        <div><span>Articles</span>5</div>
         <div><span>Tags</span>0</div>
         <div><span>Categories</span>0</div>
     </div>
@@ -104,7 +104,7 @@
   <div class="nexmoe-widget-wrap">
     <h3 class="nexmoe-widget-title">Archive</h3>
     <div class="nexmoe-widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/">2020</a><span class="archive-list-count">4</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/">2020</a><span class="archive-list-count">5</span></li></ul>
     </div>
   </div>
 
@@ -132,11 +132,35 @@
         <section class="nexmoe-posts">
     
     <div class="nexmoe-post">
+        <a href="/2020/12/24/seaborn%E7%BB%98%E5%9B%BE%E6%80%BB%E7%BB%93/">
+            
+                <div class="nexmoe-post-cover mdui-ripple" style="padding-bottom: 62.5%;"> 
+                    <img data-src="https://w.wallhaven.cc/full/g8/wallhaven-g8wel3.png" data-sizes="auto" alt="，Seaborn绘图总结（未完待续）" class="lazyload">
+                    <h1>，Seaborn绘图总结（未完待续）</h1>
+                </div>
+            
+        </a>
+
+        <div class="nexmoe-post-meta nexmoe-rainbow">
+            <a><i class="nexmoefont icon-calendar-fill"></i>2020年12月24日</a>
+            <a><i class="nexmoefont icon-areachart"></i>40 字</a>
+            <a><i class="nexmoefont icon-time-circle-fill"></i>大概 1 分钟</a>
+        </div>
+
+        <article>
+            
+                <p>大数据量的绘图适合运用seaborn工具进行绘制，实验数据没备份丢失了，正好重新来一遍，做一个总结</p>
+
+            
+        </article>
+    </div>
+    
+    <div class="nexmoe-post">
         <a href="/2020/12/23/of%E4%B8%ADfunctionObjects%E5%87%BD%E6%95%B0%E7%9A%84%E4%BD%BF%E7%94%A8%E5%8F%8AGnuplot%EF%BC%8CSeaborn%E7%BB%98%E5%9B%BE%E6%80%BB%E7%BB%93/">
             
                 <div class="nexmoe-post-cover mdui-ripple" style="padding-bottom: 62.5%;"> 
-                    <img data-src="https://w.wallhaven.cc/full/g8/wallhaven-g8wel3.png" data-sizes="auto" alt="of中functionObjects函数的使用及Gnuplot，Seaborn绘图总结（未完待续）" class="lazyload">
-                    <h1>of中functionObjects函数的使用及Gnuplot，Seaborn绘图总结（未完待续）</h1>
+                    <img data-src="https://w.wallhaven.cc/full/g8/wallhaven-g8wel3.png" data-sizes="auto" alt="of中functionObjects函数的使用及Gnuplot" class="lazyload">
+                    <h1>of中functionObjects函数的使用及Gnuplot</h1>
                 </div>
             
         </a>
@@ -184,8 +208,8 @@ sets
 
 );
 
-// *********************************************************************** //</code></pre>
-<p>此文件指定两条箭头线，在在计算域中对线上进行取样```输入postProcess -func  sampleDict -latestTime``命令进行对于最后一个时间步的采样工作，其结果会输出在postProcessing文件夹之中</p>
+// *********************************************************************** //
+</code></pre><p>此文件指定两条箭头线，在在计算域中对线上进行取样<code>`输入postProcess -func  sampleDict -latestTime</code>命令进行对于最后一个时间步的采样工作，其结果会输出在postProcessing文件夹之中</p>
 <p>建立gnuplot文件夹，在其下建立gnuplot_script文件去设置gnuplot脚本</p>
 <pre><code>set terminal qt 0//设置输出第一个窗口为0
 
@@ -227,8 +251,8 @@ pause -1
 
 #    EOF
 
-参考文献：[1]: https://blog.csdn.net/CloudBird07/article/details/106751196/</code></pre>
-<div align=center><img src="/im/11.png" width="100%" height="50%"></div>
+参考文献：[1]: https://blog.csdn.net/CloudBird07/article/details/106751196/
+</code></pre><div align=center><img src="/im/11.png" width="100%" height="50%"></div>
 
 <p>2.probesDict文件</p>
 <pre><code>FoamFile
@@ -259,8 +283,8 @@ probeLocations
     (0.316 0.0240 0)
 );
 
-// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * </code></pre>
-<p>之后在终端输入命令： <code> postProcess -func probesDict</code><br>利用gnuplot进行绘制</p>
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
+</code></pre><p>之后在终端输入命令： <code>postProcess -func probesDict</code><br>利用gnuplot进行绘制</p>
 <p>3.几个functionObject</p>
 <p>参考文献[2]: <a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/7t7IYaT0YCuJFhGeha0P6w">https://mp.weixin.qq.com/s/7t7IYaT0YCuJFhGeha0P6w</a></p>
 <p>functionObject在controlDict字典文件中进行指定，且在预定义的时间点上执行操作。<br>functionObject在OpenFOAM求解计算的过程中可以实时修改。在OpenFOAM计算完毕后也可以执行<br>functionObject在controlDict字典文件中定义，打开controlDict文件。</p>
@@ -423,8 +447,8 @@ fieldAverage1
 
 //若直接包含外部定义的functionObject
 #include &quot;externalFunctionObject&quot;
-&#125;;</code></pre>
-<p>externalFunctionObject文件</p>
+&#125;;
+</code></pre><p>externalFunctionObject文件</p>
 <pre><code>&#123;
     version     2.0;
     format      ascii;
@@ -469,8 +493,8 @@ vorticity
     enabled true;
     log    true;
     writeControl outputTime;  
-&#125;</code></pre>
-<p>有时可能事先忘记了在controlDict字典中定义functionObject，导致计算完毕后数据并未提取出来。OpenFOAM允许用户在求解计算完毕后执行functionObject，此时可以在controlDict文件中添加functionObject，然后利用命令：<br><code>name_of_the_solver -postProcess</code>对参数进行输出<br>若定义了外在函数文件externalFunctionObject<br>则执行例如下命令：<br><code>interFoam-postProcess -dict system/externalFunctionObject –time 500:2000</code></p>
+&#125;
+</code></pre><p>有时可能事先忘记了在controlDict字典中定义functionObject，导致计算完毕后数据并未提取出来。OpenFOAM允许用户在求解计算完毕后执行functionObject，此时可以在controlDict文件中添加functionObject，然后利用命令：<br><code>name_of_the_solver -postProcess</code>对参数进行输出<br>若定义了外在函数文件externalFunctionObject<br>则执行例如下命令：<br><code>interFoam-postProcess -dict system/externalFunctionObject –time 500:2000</code></p>
 <h3 id="命运石之门的选择！El-Psy-Congroo-用来分隔上下文的中二"><a href="#命运石之门的选择！El-Psy-Congroo-用来分隔上下文的中二" class="headerlink" title="命运石之门的选择！El.Psy.Congroo!////用来分隔上下文的中二"></a>命运石之门的选择！El.Psy.Congroo!////用来分隔上下文的中二</h3><h3 id="（以下为与自己相关的一些操作）"><a href="#（以下为与自己相关的一些操作）" class="headerlink" title="（以下为与自己相关的一些操作）"></a>（以下为与自己相关的一些操作）</h3><div align=center><img src="https://w.wallhaven.cc/full/0p/wallhaven-0pj79j.jpg" width="70%" height="40%"></div>
 
 <h3 id="开始正题！"><a href="#开始正题！" class="headerlink" title="开始正题！"></a>开始正题！</h3><p>在of中用vof去模拟射流后处理是很难得出液滴直径PDF的（Probability Density Function概率密度分布函数），这个参数需要确定计算域里液滴的直径，而多相流直接数值模拟的方法没法通过设置计算的参数来确定液滴直径，这时候需要用几何捕捉的方法来确定液滴的属性。在OpenFoam中有效地从数值上检查整个雾化过程，欧拉方法和拉格朗日方法之间的转换是必要的。这种转变必须基于在欧拉VOF模拟的相场内检测到单独的流体粒子。结合检测，评估关于粒子的大小、位置和速度的信息。这个过程称为欧拉粒子检测。获得的信息然后可以作为初始值传递给拉格朗日框架中的点粒子。<br>从OpenFoam-v1612开始官方实现一个称为extractEulerianParticles的功能，这是一种基于2D耦合层的方法。具体的实现方法如下所示：<br>1.在system/controlDict 中添加如下</p>
@@ -508,8 +532,8 @@ vorticity
         writeControl    writeTime;
         writeInterval   -1;
     &#125;
-&#125;</code></pre>
-<p>此处需要注意的是，这个函数无法执行postProcess而且仅仅是在面上进行粒子的捕捉，如何放置这个面是2D耦合层需要考虑的棘手问题，故开发3D全场历遍液滴的算法是个解决的好办法。如果用这种方法去转化拉格朗日液滴是适合于几何结构上对称的射流的，来流雾化可能并不合适。但是对于处理某一个位置液滴直径的pdf还是一个非常好用的方法.</p>
+&#125;
+</code></pre><p>此处需要注意的是，这个函数无法执行postProcess而且仅仅是在面上进行粒子的捕捉，如何放置这个面是2D耦合层需要考虑的棘手问题，故开发3D全场历遍液滴的算法是个解决的好办法。如果用这种方法去转化拉格朗日液滴是适合于几何结构上对称的射流的，来流雾化可能并不合适。但是对于处理某一个位置液滴直径的pdf还是一个非常好用的方法.</p>
 <p>下面叙述一下toposet的用法：</p>
 <pre><code>FoamFile
 &#123;
@@ -574,8 +598,8 @@ actions
     &#125;
 );
 
-// ************************************************************************* //</code></pre>
-<p>这篇文章里写的很全，我不详细写了：参考文献 [3] ；<a target="_blank" rel="noopener" href="http://www.xfy-learning.com/2020/05/19/OpenFOAM-topoSet/">http://www.xfy-learning.com/2020/05/19/OpenFOAM-topoSet/</a></p>
+// ************************************************************************* //
+</code></pre><p>这篇文章里写的很全，我不详细写了：参考文献 [3] ；<a target="_blank" rel="noopener" href="http://www.xfy-learning.com/2020/05/19/OpenFOAM-topoSet/">http://www.xfy-learning.com/2020/05/19/OpenFOAM-topoSet/</a></p>
 
             
         </article>
@@ -890,7 +914,7 @@ patches
 
 
 <script src="https://cdn.jsdelivr.net/gh/xtaodada/xtaodada.github.io@0.0.2/copy.js"></script>
- <script src="/js/app.js?v=1608804044601"></script>
+ <script src="/js/app.js?v=1608809160756"></script>
 
   
 
