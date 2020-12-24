@@ -12,22 +12,23 @@
   
 
   <link rel="shortcut icon" href="/favicon.ico" type="image/png" />
-  <meta name="description" content="postProcess与functionObjectsOpenFoam分为两种后处理方法，一种是传统的postProcess方法，在求解后使用；另一种方法是在运行时进行处理的Co-processing,方法是在controlDict文件夹之中添加functionObjests1.postProcess -func sampleDict输入postProcess -list来进行查看可实行后处理的目">
+  <meta name="description" content="postProcess与functionObjectsOpenFoam分为两种后处理方法，一种是传统的postProcess方法，在求解后使用；另一种方法是在运行时进行处理的Co-processing,方法是在controlDict文件夹之中添加functionObjests，但有时可能事先忘记了在controlDict字典中定义functionObject，导致计算完毕后数据并未提取出来。Ope">
 <meta property="og:type" content="article">
 <meta property="og:title" content="of中functionObjects函数的使用及Gnuplot，Seaborn绘图总结（未完待续）">
 <meta property="og:url" content="http://example.com/2020/12/23/of%E4%B8%ADfunctionObjects%E5%87%BD%E6%95%B0%E7%9A%84%E4%BD%BF%E7%94%A8%E5%8F%8AGnuplot%EF%BC%8CSeaborn%E7%BB%98%E5%9B%BE%E6%80%BB%E7%BB%93/index.html">
 <meta property="og:site_name" content="LZF">
-<meta property="og:description" content="postProcess与functionObjectsOpenFoam分为两种后处理方法，一种是传统的postProcess方法，在求解后使用；另一种方法是在运行时进行处理的Co-processing,方法是在controlDict文件夹之中添加functionObjests1.postProcess -func sampleDict输入postProcess -list来进行查看可实行后处理的目">
+<meta property="og:description" content="postProcess与functionObjectsOpenFoam分为两种后处理方法，一种是传统的postProcess方法，在求解后使用；另一种方法是在运行时进行处理的Co-processing,方法是在controlDict文件夹之中添加functionObjests，但有时可能事先忘记了在controlDict字典中定义functionObject，导致计算完毕后数据并未提取出来。Ope">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://lh3.googleusercontent.com/R2YWdLYk5krtgjrZX0RylBAqPx_Aso1oJiEB_wQlk432JG81K_qZe9XtjIoW4ZrSqUMLhV_be-UKdUpt-6Wih2VPXKQq3Gk3u7f8qhrcrbaN8IBy0H_SqZAx7wiUXuLxx_kMhGaGghlOaMm2XFN-W8v-vUE0MKFiZKuHYlMmAK6UIoCr6lkdTpwmPqUlZcVuvVRTEFcrUTLY5oGCUy7VC7xlLxhuxRC6cRO9K2iJglM6IXTWJloINAuCk0sxRzvWUWWCyDxxtB3vW3B2n-b1R-X7g3Q304dC6R3cxM1RgEZIEKy6LrNFL3HrhKSBHzqwVAEjxUTWJoNBI5hz3nzZl0RldqEn_cA4yvagxM18_QlBZBLMhBAUpjnY_a7_i9q6nGAljpvxLKUoSSKHPeOtNDf5hgcZGq3IbVNUqLq6ypIbG2-kOmdLpSplI2am-xEFYcrwFCxL1pu-Pztom1XCkMHWuhq6OHiAatMo8pkMr1TKXimpR8YeA5JvXvDVJjW29iytQBrUNiyGiEBSMWQYnNzNSUKhVbMHzNm82Q7YuHN0H4NKYAJ3Oq-fkIblBa0RxvxC-82-tuLldhf4YtCxjT2zHuSJZIg6gPXwn-_gvtecc_VfRYHenRpGjw34Lf1_txohGNfB8TI78srZaJkcJ-FRy6takrgwkJsCo3OeEtffNCP5FoVZRs626PiO=w308-h440-no?authuser=0">
+<meta property="og:image" content="https://w.wallhaven.cc/full/0p/wallhaven-0pj79j.jpg">
 <meta property="article:published_time" content="2020-12-23T02:56:34.000Z">
-<meta property="article:modified_time" content="2020-12-23T04:40:42.000Z">
+<meta property="article:modified_time" content="2020-12-24T08:29:50.000Z">
 <meta property="article:author" content="LZF">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://lh3.googleusercontent.com/R2YWdLYk5krtgjrZX0RylBAqPx_Aso1oJiEB_wQlk432JG81K_qZe9XtjIoW4ZrSqUMLhV_be-UKdUpt-6Wih2VPXKQq3Gk3u7f8qhrcrbaN8IBy0H_SqZAx7wiUXuLxx_kMhGaGghlOaMm2XFN-W8v-vUE0MKFiZKuHYlMmAK6UIoCr6lkdTpwmPqUlZcVuvVRTEFcrUTLY5oGCUy7VC7xlLxhuxRC6cRO9K2iJglM6IXTWJloINAuCk0sxRzvWUWWCyDxxtB3vW3B2n-b1R-X7g3Q304dC6R3cxM1RgEZIEKy6LrNFL3HrhKSBHzqwVAEjxUTWJoNBI5hz3nzZl0RldqEn_cA4yvagxM18_QlBZBLMhBAUpjnY_a7_i9q6nGAljpvxLKUoSSKHPeOtNDf5hgcZGq3IbVNUqLq6ypIbG2-kOmdLpSplI2am-xEFYcrwFCxL1pu-Pztom1XCkMHWuhq6OHiAatMo8pkMr1TKXimpR8YeA5JvXvDVJjW29iytQBrUNiyGiEBSMWQYnNzNSUKhVbMHzNm82Q7YuHN0H4NKYAJ3Oq-fkIblBa0RxvxC-82-tuLldhf4YtCxjT2zHuSJZIg6gPXwn-_gvtecc_VfRYHenRpGjw34Lf1_txohGNfB8TI78srZaJkcJ-FRy6takrgwkJsCo3OeEtffNCP5FoVZRs626PiO=w308-h440-no?authuser=0">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/combine/npm/highlight.js@9.15.8/styles/atom-one-dark.css,gh/nexmoe/nexmoe.github.io@latest/lib/mdui_043tiny/css/mdui.css,gh/nexmoe/nexmoe.github.io@latest/lib/iconfont/iconfont.css,gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css?v=233" crossorigin>
   
-  <link rel="stylesheet" href="/css/style.css?v=1608698451495">
+  <link rel="stylesheet" href="/css/style.css?v=1608798634773">
 <meta name="generator" content="Hexo 5.3.0"></head>
 
 <body class="mdui-drawer-body-left">
@@ -145,8 +146,8 @@
   
   <div class="nexmoe-post-meta nexmoe-rainbow" style="margin:10px 0!important;">
     <a><i class="nexmoefont icon-calendar-fill"></i>2020年12月23日</a>
-    <a><i class="nexmoefont icon-areachart"></i>558 字</a>
-    <a><i class="nexmoefont icon-time-circle-fill"></i>大概 2 分钟</a>
+    <a><i class="nexmoefont icon-areachart"></i>2.5k 字</a>
+    <a><i class="nexmoefont icon-time-circle-fill"></i>大概 12 分钟</a>
 </div>
 
   <div class="nexmoe-post-right">
@@ -154,7 +155,7 @@
   </div>
 
   <article>
-    <h2 id="postProcess与functionObjects"><a href="#postProcess与functionObjects" class="headerlink" title="postProcess与functionObjects"></a>postProcess与functionObjects</h2><p>OpenFoam分为两种后处理方法，一种是传统的postProcess方法，在求解后使用；另一种方法是在运行时进行处理的Co-processing,方法是在controlDict文件夹之中添加functionObjests<br>1.postProcess -func sampleDict<br>输入<code>postProcess -list</code>来进行查看可实行后处理的目录<br>在system文件夹下添加sampleDict文件，文件格式例子如下</p>
+    <h2 id="postProcess与functionObjects"><a href="#postProcess与functionObjects" class="headerlink" title="postProcess与functionObjects"></a>postProcess与functionObjects</h2><p>OpenFoam分为两种后处理方法，一种是传统的postProcess方法，在求解后使用；另一种方法是在运行时进行处理的Co-processing,方法是在controlDict文件夹之中添加functionObjests，但有时可能事先忘记了在controlDict字典中定义functionObject，导致计算完毕后数据并未提取出来。OpenFOAM允许用户在求解计算完毕后执行functionObject，此时可以在controlDict文件中添加functionObject，然后利用命令提取数据。这里总结几个经常使用的后处理实用程序。<br>1.sampleDict文件<br>functionObject可以在求解过程中输出指定的物理量信息。当求解计算完毕后，可以选择使用Sampling获取特定位置物理信息，此时主要使用postProcess程序来实现。<br>输入<code>postProcess -list</code>来进行查看可实行后处理的目录<br>在system文件夹下添加sampleDict文件，文件格式例子如下</p>
 <pre><code>// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
 type sets;
@@ -206,7 +207,7 @@ set ylabel &quot;Y centerline&quot;//设置纵坐标
 set xlabel &quot;UX&quot;//设置横坐标
 plot &#39;gnuplot/UX_yline&#39; u 2:1 w lp pt 7 title &#39;Ghia et al.&#39;,&#39;./postProcessing/sampleDict/50/l2_U.xy&#39; u 2:1 pt 6 title &#39;Current solution&#39;
 
-例子：plot  &#39;.\line_rhoe1.xy&#39; u 1:2  w lp lw 2 lt 2 pt 1 lc rgb &quot;black&quot; ,\
+#例子：plot  &#39;.\line_rhoe1.xy&#39; u 1:2  w lp lw 2 lt 2 pt 1 lc rgb &quot;black&quot; ,\
 &#39;.\line_rhoe2.xy&#39; u 1:2  w l lw 2 lc rgb &quot;black&quot; 
 
 #u 1:2 使用第一列数据为x轴，第二列数据为y轴 还可以进行运算 例如 u 1:($2)/($3)
@@ -233,9 +234,353 @@ pause -1
 #    EOF
 
 参考文献：[1]: https://blog.csdn.net/CloudBird07/article/details/106751196/</code></pre>
-<div align=center>
+<div align=center><img src="https://lh3.googleusercontent.com/R2YWdLYk5krtgjrZX0RylBAqPx_Aso1oJiEB_wQlk432JG81K_qZe9XtjIoW4ZrSqUMLhV_be-UKdUpt-6Wih2VPXKQq3Gk3u7f8qhrcrbaN8IBy0H_SqZAx7wiUXuLxx_kMhGaGghlOaMm2XFN-W8v-vUE0MKFiZKuHYlMmAK6UIoCr6lkdTpwmPqUlZcVuvVRTEFcrUTLY5oGCUy7VC7xlLxhuxRC6cRO9K2iJglM6IXTWJloINAuCk0sxRzvWUWWCyDxxtB3vW3B2n-b1R-X7g3Q304dC6R3cxM1RgEZIEKy6LrNFL3HrhKSBHzqwVAEjxUTWJoNBI5hz3nzZl0RldqEn_cA4yvagxM18_QlBZBLMhBAUpjnY_a7_i9q6nGAljpvxLKUoSSKHPeOtNDf5hgcZGq3IbVNUqLq6ypIbG2-kOmdLpSplI2am-xEFYcrwFCxL1pu-Pztom1XCkMHWuhq6OHiAatMo8pkMr1TKXimpR8YeA5JvXvDVJjW29iytQBrUNiyGiEBSMWQYnNzNSUKhVbMHzNm82Q7YuHN0H4NKYAJ3Oq-fkIblBa0RxvxC-82-tuLldhf4YtCxjT2zHuSJZIg6gPXwn-_gvtecc_VfRYHenRpGjw34Lf1_txohGNfB8TI78srZaJkcJ-FRy6takrgwkJsCo3OeEtffNCP5FoVZRs626PiO=w308-h440-no?authuser=0" width="70%" height="50%"></div>
 
-<p><img src="https://lh3.googleusercontent.com/R2YWdLYk5krtgjrZX0RylBAqPx_Aso1oJiEB_wQlk432JG81K_qZe9XtjIoW4ZrSqUMLhV_be-UKdUpt-6Wih2VPXKQq3Gk3u7f8qhrcrbaN8IBy0H_SqZAx7wiUXuLxx_kMhGaGghlOaMm2XFN-W8v-vUE0MKFiZKuHYlMmAK6UIoCr6lkdTpwmPqUlZcVuvVRTEFcrUTLY5oGCUy7VC7xlLxhuxRC6cRO9K2iJglM6IXTWJloINAuCk0sxRzvWUWWCyDxxtB3vW3B2n-b1R-X7g3Q304dC6R3cxM1RgEZIEKy6LrNFL3HrhKSBHzqwVAEjxUTWJoNBI5hz3nzZl0RldqEn_cA4yvagxM18_QlBZBLMhBAUpjnY_a7_i9q6nGAljpvxLKUoSSKHPeOtNDf5hgcZGq3IbVNUqLq6ypIbG2-kOmdLpSplI2am-xEFYcrwFCxL1pu-Pztom1XCkMHWuhq6OHiAatMo8pkMr1TKXimpR8YeA5JvXvDVJjW29iytQBrUNiyGiEBSMWQYnNzNSUKhVbMHzNm82Q7YuHN0H4NKYAJ3Oq-fkIblBa0RxvxC-82-tuLldhf4YtCxjT2zHuSJZIg6gPXwn-_gvtecc_VfRYHenRpGjw34Lf1_txohGNfB8TI78srZaJkcJ-FRy6takrgwkJsCo3OeEtffNCP5FoVZRs626PiO=w308-h440-no?authuser=0"></p>
+<p>2.probesDict文件</p>
+<pre><code>FoamFile
+&#123;
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      probesDict;
+&#125;
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+// 指定类型为probes
+type probes;
+// 指定需要提取的物理场
+fields
+(
+    alpha.water
+    U
+    p_rgh
+    p
+);
+// 取样点的坐标列表
+probeLocations
+(
+    (0.292 0 0)
+    (0.292 0.0240 0)
+    (0.292 0.0480 0)
+    (0.316 0.0480 0)
+    (0.316 0.0240 0)
+);
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * </code></pre>
+<p>之后在终端输入命令： <code> postProcess -func probesDict</code><br>利用gnuplot进行绘制</p>
+<p>3.几个functionObject</p>
+<p>参考文献[2]: <a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/7t7IYaT0YCuJFhGeha0P6w">https://mp.weixin.qq.com/s/7t7IYaT0YCuJFhGeha0P6w</a></p>
+<p>functionObject在controlDict字典文件中进行指定，且在预定义的时间点上执行操作。<br>functionObject在OpenFOAM求解计算的过程中可以实时修改。在OpenFOAM计算完毕后也可以执行<br>functionObject在controlDict字典文件中定义，打开controlDict文件。</p>
+<pre><code>FoamFile
+&#123;
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      controlDict;
+&#125;
+// * * * * * * * * * * * * * * * * //
+
+application     simpleFoam;
+startFrom       startTime;
+startTime       0;
+stopAt          endTime;
+endTime         2000;
+deltaT          1;
+writeControl    runTime;
+writeInterval   50;
+purgeWrite      100;
+writeFormat     binary;   
+writePrecision  8;
+writeCompression off;
+timeFormat      general;
+timePrecision   6;
+runTimeModifiable yes;
+
+//下面为functionObject的定义
+functions
+&#123;
+forces_object
+&#123;
+    // 指定类型为forces，必须项
+    type forces;
+    // 加载functionObject库
+    functionObjectLibs (&quot;libforces.so&quot;);
+
+    // 指定数据输出频率
+    writeControl   timeStep;
+    writetInterval  1;
+
+    // 激活functionObject对象
+    enabled true;
+
+    // 指定参与计算的边界，必须项
+    patches (&quot;wall_slat&quot; &quot;wall_airfoil&quot; &quot;wall_flap&quot;);
+
+    //// 指定压力场与速度场的变量名称
+    pName p;
+    Uname U;
+
+    // 参考密度值。它仅需要针对不可压缩的流进行定义。
+    // 对于可压缩流，将使用计算的密度代替
+    rho rhoInf;
+    rhoInf 1.0;
+
+    //// 指定力矩计算所需的旋转中心
+    CofR (0 0 0);
+&#125;
+// 关于forces的写法，可参阅文档：
+/* https://cpp.openfoam.org/v8/classFoam_1_1functionObjects_1_1forces.html*/
+///////////////////////////////////////////
+
+forceCoeffs_object
+&#123;
+    // 指定类型为力系数，该项为必选项
+    type forceCoeffs;
+
+    functionObjectLibs (&quot;libforces.so&quot;);
+    // 激活此对象
+    enabled true;
+    // 指定参与计算的边界名称，此项为必选项
+    patches (&quot;wall_slat&quot; &quot;wall_airfoil&quot; &quot;wall_flap&quot;);
+    // 指定变量名称
+    pName p;
+    Uname U;
+
+    // 仅用于不可压缩流动
+    rho rhoInf;
+    rhoInf 1.0;
+
+    // 将数据写入到文件中
+    log true;
+    // 指定旋转中心坐标
+    CofR (0.0 0 0);
+    // 用于计算系数的参考值，4个均为必选项
+    pitchAxis (0 0 1);    // 俯仰轴
+    magUInf 1.0;    // 参考速度
+    lRef 1;        // 用于力矩计算的参考长度
+    Aref 1;        // 用于系数计算的参考面积
+
+    // 指定数据的写入频率
+    writeControl   timeStep;
+    writeInterval  1;
+
+    // 指定升力方向与阻力方向，必选项
+    // 对于升力来讲，其值为攻角的三角函数（-sin,cos,0)
+    // 对于阻力，其值为攻角的三角函数（cos,sin,0)
+    // 注意角度换算为弧度
+    liftDir     (0 1 0);       
+    dragDir     (1 0 0);           
+&#125;   
+////////////////////////////////////////////
+minmaxdomain
+&#123;
+    // 指定类型为fieldMinMax，必选项
+    // 用于输出计算域内指定物理量的最大最小值
+    type fieldMinMax;
+
+    functionObjectLibs (&quot;libfieldFunctionObjects.so&quot;);
+
+    enabled true;
+    // 指定计算物理场的分量，这里还可以指定magnitude
+    mode component;
+    // 指定数据写入频率
+    writeControl timeStep;
+    writeInterval 1;
+
+    log true;
+    // 指定需要输出的物理场
+    fields (p U nuTilda nut k omega);
+&#125;
+fieldAverage1
+&#123;
+    // 指定类型fieldAverage，输出物理场的平均值
+    type            fieldAverage;
+    libs ( &quot;libfieldFunctionObjects.so&quot; );
+    writeControl    writeTime;
+
+    enabled         true;
+    log             true;
+    timeStart       100;
+    // 下面指定需要输出的物理场，包括U，p及nut
+    fields
+    (
+        U
+        &#123;
+                mean        on;
+                prime2Mean  on;
+                base        time;
+        &#125;
+
+        p
+        &#123;
+                mean        on;
+                prime2Mean  on;
+                base        time;
+        &#125;
+
+        nut
+        &#123;
+                mean        on;
+                prime2Mean  on;
+                base        time;
+        &#125;
+    );
+&#125;
+
+
+//若直接包含外部定义的functionObject
+#include &quot;externalFunctionObject&quot;
+&#125;;</code></pre>
+<p>externalFunctionObject文件</p>
+<pre><code>&#123;
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      functionObject;
+&#125;
+
+
+
+//functions
+//&#123;
+// 定义了监测点数据提取
+probes_online
+&#123;
+    type probes;
+    functionObjectLibs (&quot;libfieldFunctionObjects.so&quot;);
+    enabled true;
+    writeControl timeStep;
+    writeInterval 1;
+
+    probeLocations 
+    (
+        (1 0 0)
+        (2 0 0)
+        (2 0.25 0)
+        (2 -0.25 0)
+    );
+
+    fields
+    (  
+        U
+        p
+    );
+
+&#125;
+
+// 定义了涡量提取
+vorticity
+&#123;
+    type vorticity;
+    functionObjectLibs (&quot;libfieldFunctionObjects.so&quot;);
+    enabled true;
+    log    true;
+    writeControl outputTime;  
+&#125;</code></pre>
+<p>有时可能事先忘记了在controlDict字典中定义functionObject，导致计算完毕后数据并未提取出来。OpenFOAM允许用户在求解计算完毕后执行functionObject，此时可以在controlDict文件中添加functionObject，然后利用命令：<br><code>name_of_the_solver -postProcess</code>对参数进行输出<br>若定义了外在函数文件externalFunctionObject<br>则执行例如下命令：<br><code>interFoam-postProcess -dict system/externalFunctionObject –time 500:2000</code></p>
+<h3 id="命运石之门的选择！El-Psy-Congroo-用来分隔上下文的中二"><a href="#命运石之门的选择！El-Psy-Congroo-用来分隔上下文的中二" class="headerlink" title="命运石之门的选择！El.Psy.Congroo!////用来分隔上下文的中二"></a>命运石之门的选择！El.Psy.Congroo!////用来分隔上下文的中二</h3><h3 id="（以下为与自己相关的一些操作）"><a href="#（以下为与自己相关的一些操作）" class="headerlink" title="（以下为与自己相关的一些操作）"></a>（以下为与自己相关的一些操作）</h3><div align=center><img src="https://w.wallhaven.cc/full/0p/wallhaven-0pj79j.jpg" width="70%" height="40%"></div>
+
+<h3 id="开始正题！"><a href="#开始正题！" class="headerlink" title="开始正题！"></a>开始正题！</h3><p>在of中用vof去模拟射流后处理是很难得出液滴直径PDF的（Probability Density Function概率密度分布函数），这个参数需要确定计算域里液滴的直径，而多相流直接数值模拟的方法没法通过设置计算的参数来确定液滴直径，这时候需要用几何捕捉的方法来确定液滴的属性。在OpenFoam中有效地从数值上检查整个雾化过程，欧拉方法和拉格朗日方法之间的转换是必要的。这种转变必须基于在欧拉VOF模拟的相场内检测到单独的流体粒子。结合检测，评估关于粒子的大小、位置和速度的信息。这个过程称为欧拉粒子检测。获得的信息然后可以作为初始值传递给拉格朗日框架中的点粒子。<br>从OpenFoam-v1612开始官方实现一个称为extractEulerianParticles的功能，这是一种基于2D耦合层的方法。具体的实现方法如下所示：<br>1.在system/controlDict 中添加如下</p>
+<pre><code>functions
+&#123;
+    extractEulerianParticles1
+    &#123;
+        // Mandatory entries
+        type            extractEulerianParticles;
+        libs            (fieldFunctionObjects);
+        faceZone        collector;//你自己定义的面区域
+        alpha           alpha.water;
+
+        // Optional entries
+        alphaThreshold  0.1;//相分数阈值
+        nLocations      0;
+        U               U;
+        rho             rho;
+        phi             phi;
+        //minDiameter     1e-30;//可限定最大最小直径的阈值
+        //maxDiameter     1e30;
+
+        // Optional (inherited) entries
+        writePrecision   6;
+        writeToFile      true;
+        useUserTime      false;
+
+        region          region0;
+        enabled         true;
+        log             true;
+        timeStart       0;
+        timeEnd         1000;
+        executeControl  timeStep;
+        executeInterval 1;
+        writeControl    writeTime;
+        writeInterval   -1;
+    &#125;
+&#125;</code></pre>
+<p>此处需要注意的是，这个函数无法执行postProcess而且仅仅是在面上进行粒子的捕捉，如何放置这个面是2D耦合层需要考虑的棘手问题，故开发3D全场历遍液滴的算法是个解决的好办法。如果用这种方法去转化拉格朗日液滴是适合于几何结构上对称的射流的，来流雾化可能并不合适。但是对于处理某一个位置液滴直径的pdf还是一个非常好用的方法.</p>
+<p>下面叙述一下toposet的用法：</p>
+<pre><code>FoamFile
+&#123;
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      topoSetDict;
+&#125;
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+// The topoSetDict comprises a list of actions to perform on different
+// set types (cellSet, faceSet, pointSet, etc).
+//
+// Each action is a dictionary with e.g.
+//     // Name of set
+//     name    c0;
+//
+//     // type: pointSet/faceSet/cellSet/faceZoneSet/cellZoneSet
+//     type    cellSet;
+//
+//     // action to perform on set. Two types:
+//     // - require no source : clear/invert/remove
+//     //       clear  : clears set or zone
+//     //       invert : select all currently non-selected elements
+//     //       remove : removes set or zone
+//     // - require source    : new/add/subtract/subset
+//     //       new    : create new set or zone from source
+//     //       add    : add source to contents
+//     //       subtract : subtract source from contents
+//     //       subset : keeps elements both in contents and source
+//     action  new;
+//
+// The source entry varies according to the type of set.
+//
+// In OpenFOAM 1806 and earlier, it was compulsory to use a &#39;sourceInfo&#39;
+// sub-dictionary to define the sources.
+// In OpenFOAM 1812 and later, this sub-directory is optional, unless
+// there would be a name clash (Eg, &#39;type&#39; or &#39;name&#39; appearing at both levels).
+// In most cases, the source definitions have been adjusted to avoid such
+// clashes.
+//
+// More detailed listing in the annotated topoSetSourcesDict
+
+actions
+(
+    // Get all faces in cellSet
+    &#123;
+        name    f0;
+        type    faceSet;
+        action  new;
+        source  boxToFace;
+        box     (0.099 0 0) (0.101 1 1);
+    &#125;
+
+    // Determine inverse cellSet
+    &#123;
+        name    fz1;
+        type    faceZoneSet;
+        action  new;
+        source  setToFaceZone;
+        faceSet f0;
+    &#125;
+);
+
+// ************************************************************************* //</code></pre>
 
   </article>
 
@@ -288,7 +633,7 @@ pause -1
 
 
 <script src="https://cdn.jsdelivr.net/gh/xtaodada/xtaodada.github.io@0.0.2/copy.js"></script>
- <script src="/js/app.js?v=1608698451499"></script>
+ <script src="/js/app.js?v=1608798634782"></script>
 
   
 
