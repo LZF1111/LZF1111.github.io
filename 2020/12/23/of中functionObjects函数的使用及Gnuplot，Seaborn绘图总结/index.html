@@ -19,16 +19,16 @@
 <meta property="og:site_name" content="LZF">
 <meta property="og:description" content="1.postProcess与functionObjectsOpenFoam分为两种后处理方法，一种是传统的postProcess方法，在求解后使用；另一种方法是在运行时进行处理的Co-processing,方法是在controlDict文件夹之中添加functionObjests，但有时可能事先忘记了在controlDict字典中定义functionObject，导致计算完毕后数据并未提取出来。O">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://lh3.googleusercontent.com/1fsTg1Hro3o6V24-kT6MdQ7mssOYhPjGExmuN7koUu0EOlzsTxIJEFvb4z0uS3tkHVtncOJDVKqjufwFgTr3Csqzyx4kHblwoxR8aMRuuXwY5DQ23DhOvoqFNej8tsjo65bc-Njy-edbgPVdyBzz-y7akqyCy2JLcj1K3yrwWFxTLMIoU3SO7h_sRvFBwOkWC9QjDTWqaak-kHNHVkLz8AR_AJleqV_aJHycgchEpBRslrd00ZGA1dHC-AKwIa_m6ZzST7H-VGqp0GbFEIEcTdVT4afHKkxJrIuMLmV8LaQwExuJRRY1ML-uTexV4O40ThpuSFWDkmA5Kd0d3YxcO7vZnIxgOZVZw2PhntM1a8gd9JFhg0zQDPkkkdKTAH3fhSsh92j_2tmdpdfGofaF5p7ABbGTM1rvkd8sZmGrXPv_eBtZKoCzboY_5oV_HCk8p305VQR5b0BcqizrqYddJmma53jrf2oF41mgxOFv13tIvUErmANLh6OIvYUry97MPnmtVBMO0Ve0CnGCp4oShbdzc7e867KF0H_Xw3n9eQpWmKhq8bmYl0eJ2IotqYyQuDXLpFeUqvEbtrdaQEwC-PfoRh-f7XIWNZHeXiMdQao3MZY6PhmQHbc5wb7aJNe39o1RxuWEs4qKgRJCduaqbdXw9YfG6VGr0vgGNezKUawOY_mI3iA-TFXTcNuJ=w631-h451-no?authuser=0">
+<meta property="og:image" content="https://www.jianguoyun.com/c/tblv2/VcFmpsJMFHG2m7BrA1RUKRLM3GBz6ku4RDfPJC0m0RiaDdCpXaWskFa2swyjMJrMV7ZwqPAT/PAnZmnxBeY2Qgi1GDEbTgw/l">
 <meta property="og:image" content="https://w.wallhaven.cc/full/0p/wallhaven-0pj79j.jpg">
 <meta property="article:published_time" content="2020-12-23T02:56:34.000Z">
-<meta property="article:modified_time" content="2020-12-24T09:16:12.000Z">
+<meta property="article:modified_time" content="2020-12-24T09:24:26.000Z">
 <meta property="article:author" content="LZF">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://lh3.googleusercontent.com/1fsTg1Hro3o6V24-kT6MdQ7mssOYhPjGExmuN7koUu0EOlzsTxIJEFvb4z0uS3tkHVtncOJDVKqjufwFgTr3Csqzyx4kHblwoxR8aMRuuXwY5DQ23DhOvoqFNej8tsjo65bc-Njy-edbgPVdyBzz-y7akqyCy2JLcj1K3yrwWFxTLMIoU3SO7h_sRvFBwOkWC9QjDTWqaak-kHNHVkLz8AR_AJleqV_aJHycgchEpBRslrd00ZGA1dHC-AKwIa_m6ZzST7H-VGqp0GbFEIEcTdVT4afHKkxJrIuMLmV8LaQwExuJRRY1ML-uTexV4O40ThpuSFWDkmA5Kd0d3YxcO7vZnIxgOZVZw2PhntM1a8gd9JFhg0zQDPkkkdKTAH3fhSsh92j_2tmdpdfGofaF5p7ABbGTM1rvkd8sZmGrXPv_eBtZKoCzboY_5oV_HCk8p305VQR5b0BcqizrqYddJmma53jrf2oF41mgxOFv13tIvUErmANLh6OIvYUry97MPnmtVBMO0Ve0CnGCp4oShbdzc7e867KF0H_Xw3n9eQpWmKhq8bmYl0eJ2IotqYyQuDXLpFeUqvEbtrdaQEwC-PfoRh-f7XIWNZHeXiMdQao3MZY6PhmQHbc5wb7aJNe39o1RxuWEs4qKgRJCduaqbdXw9YfG6VGr0vgGNezKUawOY_mI3iA-TFXTcNuJ=w631-h451-no?authuser=0">
+<meta name="twitter:image" content="https://www.jianguoyun.com/c/tblv2/VcFmpsJMFHG2m7BrA1RUKRLM3GBz6ku4RDfPJC0m0RiaDdCpXaWskFa2swyjMJrMV7ZwqPAT/PAnZmnxBeY2Qgi1GDEbTgw/l">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/combine/npm/highlight.js@9.15.8/styles/atom-one-dark.css,gh/nexmoe/nexmoe.github.io@latest/lib/mdui_043tiny/css/mdui.css,gh/nexmoe/nexmoe.github.io@latest/lib/iconfont/iconfont.css,gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css?v=233" crossorigin>
   
-  <link rel="stylesheet" href="/css/style.css?v=1608801390656">
+  <link rel="stylesheet" href="/css/style.css?v=1608801907673">
 <meta name="generator" content="Hexo 5.3.0"></head>
 
 <body class="mdui-drawer-body-left">
@@ -234,7 +234,7 @@ pause -1
 #    EOF
 
 参考文献：[1]: https://blog.csdn.net/CloudBird07/article/details/106751196/</code></pre>
-<div align=center><img src="https://lh3.googleusercontent.com/1fsTg1Hro3o6V24-kT6MdQ7mssOYhPjGExmuN7koUu0EOlzsTxIJEFvb4z0uS3tkHVtncOJDVKqjufwFgTr3Csqzyx4kHblwoxR8aMRuuXwY5DQ23DhOvoqFNej8tsjo65bc-Njy-edbgPVdyBzz-y7akqyCy2JLcj1K3yrwWFxTLMIoU3SO7h_sRvFBwOkWC9QjDTWqaak-kHNHVkLz8AR_AJleqV_aJHycgchEpBRslrd00ZGA1dHC-AKwIa_m6ZzST7H-VGqp0GbFEIEcTdVT4afHKkxJrIuMLmV8LaQwExuJRRY1ML-uTexV4O40ThpuSFWDkmA5Kd0d3YxcO7vZnIxgOZVZw2PhntM1a8gd9JFhg0zQDPkkkdKTAH3fhSsh92j_2tmdpdfGofaF5p7ABbGTM1rvkd8sZmGrXPv_eBtZKoCzboY_5oV_HCk8p305VQR5b0BcqizrqYddJmma53jrf2oF41mgxOFv13tIvUErmANLh6OIvYUry97MPnmtVBMO0Ve0CnGCp4oShbdzc7e867KF0H_Xw3n9eQpWmKhq8bmYl0eJ2IotqYyQuDXLpFeUqvEbtrdaQEwC-PfoRh-f7XIWNZHeXiMdQao3MZY6PhmQHbc5wb7aJNe39o1RxuWEs4qKgRJCduaqbdXw9YfG6VGr0vgGNezKUawOY_mI3iA-TFXTcNuJ=w631-h451-no?authuser=0" width="100%" height="50%"></div>
+<div align=center><img src="https://www.jianguoyun.com/c/tblv2/VcFmpsJMFHG2m7BrA1RUKRLM3GBz6ku4RDfPJC0m0RiaDdCpXaWskFa2swyjMJrMV7ZwqPAT/PAnZmnxBeY2Qgi1GDEbTgw/l" width="100%" height="50%"></div>
 
 <p>2.probesDict文件</p>
 <pre><code>FoamFile
@@ -633,7 +633,7 @@ actions
 
 
 <script src="https://cdn.jsdelivr.net/gh/xtaodada/xtaodada.github.io@0.0.2/copy.js"></script>
- <script src="/js/app.js?v=1608801390663"></script>
+ <script src="/js/app.js?v=1608801907683"></script>
 
   
 
