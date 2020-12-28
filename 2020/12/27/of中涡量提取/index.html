@@ -20,16 +20,17 @@
 <meta property="og:description" content="提取涡量的方法参考文献 [1] :http:&#x2F;&#x2F;xiaopingqiu.github.io&#x2F;2016&#x2F;05&#x2F;22&#x2F;QAndLambda&#x2F; (1). 用流线去封闭涡   (2). 速度梯度 ∇U 的二阶不变量 Q 的定义为$Q&#x3D;\frac{1}{2}\left(|\mathbf{W}|^{2}-|\mathbf{S}|^{2}\right)$$\mathbf{W}&#x3D;\frac{1}{2}\left(">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://example.com/im/v.jpg">
+<meta property="og:image" content="http://example.com/im/q.jpg">
 <meta property="og:image" content="http://example.com/im/b.jpg">
 <meta property="og:image" content="http://example.com/im/b2.jpg">
 <meta property="article:published_time" content="2020-12-27T03:03:37.000Z">
-<meta property="article:modified_time" content="2020-12-27T06:46:54.000Z">
+<meta property="article:modified_time" content="2020-12-28T02:21:02.000Z">
 <meta property="article:author" content="LZF">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://example.com/im/v.jpg">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/combine/npm/highlight.js@9.15.8/styles/atom-one-dark.css,gh/nexmoe/nexmoe.github.io@latest/lib/mdui_043tiny/css/mdui.css,gh/nexmoe/nexmoe.github.io@latest/lib/iconfont/iconfont.css,gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css?v=233" crossorigin>
   
-  <link rel="stylesheet" href="/css/style.css?v=1609121889883">
+  <link rel="stylesheet" href="/css/style.css?v=1609134295916">
 <meta name="generator" content="Hexo 5.3.0"></head>
 
 <body class="mdui-drawer-body-left">
@@ -147,7 +148,7 @@
   
   <div class="nexmoe-post-meta nexmoe-rainbow" style="margin:10px 0!important;">
     <a><i class="nexmoefont icon-calendar-fill"></i>2020年12月27日</a>
-    <a><i class="nexmoefont icon-areachart"></i>178 字</a>
+    <a><i class="nexmoefont icon-areachart"></i>186 字</a>
     <a><i class="nexmoefont icon-time-circle-fill"></i>大概 1 分钟</a>
 </div>
 
@@ -175,7 +176,12 @@ volScalarField Q
         IOobject::AUTO_WRITE
     ),
     0.5*(sqr(tr(gradU)) - tr(((gradU)&amp;(gradU))))
-);</code></pre>
+);
+</code></pre><p>取Q&gt;0的等值面</p>
+<div align=center><img src="/im/q.jpg" width="100%" height="50%"></div>
+
+
+
 <h2 id="说到这里把张量运算符在of中的操作做一下总结"><a href="#说到这里把张量运算符在of中的操作做一下总结" class="headerlink" title="说到这里把张量运算符在of中的操作做一下总结"></a>说到这里把张量运算符在of中的操作做一下总结</h2><p>参考文献：[2] :《OpenFoam编程指南》.李东岳</p>
 <div align=center><img src="/im/b.jpg" width="100%" height="50%"></div>
 <div align=center><img src="/im/b2.jpg" width="100%" height="50%"></div>
@@ -231,7 +237,7 @@ volScalarField Q
 
 
 <script src="https://cdn.jsdelivr.net/gh/xtaodada/xtaodada.github.io@0.0.2/copy.js"></script>
- <script src="/js/app.js?v=1609121889885"></script>
+ <script src="/js/app.js?v=1609134295921"></script>
 
   
 
@@ -239,6 +245,21 @@ volScalarField Q
 
 
 
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
 </body>
 
 </html>

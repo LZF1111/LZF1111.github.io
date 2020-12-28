@@ -21,7 +21,7 @@
 <meta name="twitter:card" content="summary">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/combine/npm/highlight.js@9.15.8/styles/atom-one-dark.css,gh/nexmoe/nexmoe.github.io@latest/lib/mdui_043tiny/css/mdui.css,gh/nexmoe/nexmoe.github.io@latest/lib/iconfont/iconfont.css,gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css?v=233" crossorigin>
   
-  <link rel="stylesheet" href="/css/style.css?v=1609121889915">
+  <link rel="stylesheet" href="/css/style.css?v=1609134295979">
 <meta name="generator" content="Hexo 5.3.0"></head>
 
 <body class="mdui-drawer-body-left">
@@ -143,7 +143,7 @@
 
         <div class="nexmoe-post-meta nexmoe-rainbow">
             <a><i class="nexmoefont icon-calendar-fill"></i>2020年12月27日</a>
-            <a><i class="nexmoefont icon-areachart"></i>178 字</a>
+            <a><i class="nexmoefont icon-areachart"></i>186 字</a>
             <a><i class="nexmoefont icon-time-circle-fill"></i>大概 1 分钟</a>
         </div>
 
@@ -168,7 +168,12 @@ volScalarField Q
         IOobject::AUTO_WRITE
     ),
     0.5*(sqr(tr(gradU)) - tr(((gradU)&amp;(gradU))))
-);</code></pre>
+);
+</code></pre><p>取Q&gt;0的等值面</p>
+<div align=center><img src="/im/q.jpg" width="100%" height="50%"></div>
+
+
+
 <h2 id="说到这里把张量运算符在of中的操作做一下总结"><a href="#说到这里把张量运算符在of中的操作做一下总结" class="headerlink" title="说到这里把张量运算符在of中的操作做一下总结"></a>说到这里把张量运算符在of中的操作做一下总结</h2><p>参考文献：[2] :《OpenFoam编程指南》.李东岳</p>
 <div align=center><img src="/im/b.jpg" width="100%" height="50%"></div>
 <div align=center><img src="/im/b2.jpg" width="100%" height="50%"></div>
@@ -1011,7 +1016,7 @@ patches
 
 
 <script src="https://cdn.jsdelivr.net/gh/xtaodada/xtaodada.github.io@0.0.2/copy.js"></script>
- <script src="/js/app.js?v=1609121889916"></script>
+ <script src="/js/app.js?v=1609134295981"></script>
 
   
 
@@ -1019,6 +1024,21 @@ patches
 
 
 
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
 </body>
 
 </html>
